@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/2. Scenes/Game With Boots.unity
+    guid: 601a5877dbe755840993239d9b0a3cd2
+  - enabled: 1
     path: Assets/2. Scenes/Game.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

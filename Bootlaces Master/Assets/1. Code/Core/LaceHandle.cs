@@ -41,11 +41,12 @@ namespace BootlacesMaster
             transform.DOMoveY(_originalHeight + _grabHeight, _grabTime);
         }
         
-        public void Attach()
+        public void Attach(Hole hole)
         {
             if (Attached)
                 throw new InvalidOperationException("You can't attach lace that already attached.");
 
+            _originalHeight = hole.Position.y;
             Attached = true;
             transform.DOMoveY(_originalHeight, _grabTime);
         }

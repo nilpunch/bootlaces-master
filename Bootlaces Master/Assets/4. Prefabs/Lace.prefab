@@ -54,81 +54,76 @@ MonoBehaviour:
   m_CollisionMaterial: {fileID: 0}
   m_SurfaceCollisions: 0
   m_SelfCollisions: 0
-  restLength_: 2.8742764
+  restLength_: 2.7465246
   elements:
   - particle1: 0
     particle2: 1
-    restLength: 0.18920735
+    restLength: 0.19527386
     constraintForce: 0
     tearResistance: 1
   - particle1: 1
     particle2: 2
-    restLength: 0.19206096
+    restLength: 0.196193
     constraintForce: 0
     tearResistance: 1
   - particle1: 2
     particle2: 3
-    restLength: 0.19357738
+    restLength: 0.19649513
     constraintForce: 0
     tearResistance: 1
   - particle1: 3
     particle2: 4
-    restLength: 0.19115777
+    restLength: 0.19604792
     constraintForce: 0
     tearResistance: 1
   - particle1: 4
     particle2: 5
-    restLength: 0.19172142
+    restLength: 0.19603147
     constraintForce: 0
     tearResistance: 1
   - particle1: 5
     particle2: 6
-    restLength: 0.19183955
+    restLength: 0.19558129
     constraintForce: 0
     tearResistance: 1
   - particle1: 6
     particle2: 7
-    restLength: 0.19175835
+    restLength: 0.19439416
     constraintForce: 0
     tearResistance: 1
   - particle1: 7
     particle2: 8
-    restLength: 0.19163592
+    restLength: 0.19533356
     constraintForce: 0
     tearResistance: 1
   - particle1: 8
     particle2: 9
-    restLength: 0.19178386
+    restLength: 0.1965206
     constraintForce: 0
     tearResistance: 1
   - particle1: 9
     particle2: 10
-    restLength: 0.19186053
+    restLength: 0.19694316
     constraintForce: 0
     tearResistance: 1
   - particle1: 10
     particle2: 11
-    restLength: 0.19174682
+    restLength: 0.19697675
     constraintForce: 0
     tearResistance: 1
   - particle1: 11
     particle2: 12
-    restLength: 0.19120087
+    restLength: 0.19740322
     constraintForce: 0
     tearResistance: 1
   - particle1: 12
     particle2: 13
-    restLength: 0.1933596
+    restLength: 0.19708598
     constraintForce: 0
     tearResistance: 1
   - particle1: 13
     particle2: 14
-    restLength: 0.19226277
-    constraintForce: 0
-    tearResistance: 1
-  - particle1: 14
-    particle2: 15
-    restLength: 0.18910298
+    restLength: 0.19624439
     constraintForce: 0
     tearResistance: 1
   m_RopeBlueprint: {fileID: 11400000, guid: 8a38b30088b4fad419b0a40ba90d0fd1, type: 2}
@@ -206,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   decimation: 0
-  smoothing: 3
+  smoothing: 0
   twist: 0
 --- !u!114 &610958181416759698
 MonoBehaviour:
@@ -361,7 +356,7 @@ MonoBehaviour:
   _tensionLongingChange: 600
   _tensionShorteningChange: 1000
   _tensionLongingTreshold: 0.03
-  _tensionRestingTreshold: 0.005
+  _tensionRestingTreshold: 0.01
 --- !u!1 &8745883382389993985
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,10 +366,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8745883382389993988}
+  - component: {fileID: 8745883382389993984}
   - component: {fileID: 8745883382389993989}
   - component: {fileID: 8745883382389993986}
   - component: {fileID: 8745883382389993987}
-  - component: {fileID: 8745883382389993984}
   m_Layer: 6
   m_Name: Start
   m_TagString: Untagged
@@ -390,12 +385,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8745883382389993985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8745883381352788986}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8745883382389993984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745883382389993985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c88691b7f764525b2f503fdae9d688f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lace: {fileID: 0}
+  _easeTime: 0.3
+  _grabTime: 0.3
+  _grabHeight: 1
 --- !u!33 &8745883382389993989
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -458,22 +469,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8745883382389993984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8745883382389993985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c88691b7f764525b2f503fdae9d688f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lace: {fileID: 0}
-  _easeTime: 0.3
-  _grabTime: 0.3
-  _grabHeight: 1
 --- !u!1 &8745883383217847536
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,10 +478,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8745883383217847539}
+  - component: {fileID: 8745883383217847543}
   - component: {fileID: 8745883383217847540}
   - component: {fileID: 8745883383217847541}
   - component: {fileID: 8745883383217847538}
-  - component: {fileID: 8745883383217847543}
   m_Layer: 6
   m_Name: End
   m_TagString: Untagged
@@ -508,6 +503,22 @@ Transform:
   m_Father: {fileID: 8745883381352788986}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8745883383217847543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745883383217847536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c88691b7f764525b2f503fdae9d688f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lace: {fileID: 0}
+  _easeTime: 0.3
+  _grabTime: 0.3
+  _grabHeight: 1
 --- !u!33 &8745883383217847540
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -570,19 +581,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8745883383217847543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8745883383217847536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c88691b7f764525b2f503fdae9d688f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lace: {fileID: 0}
-  _easeTime: 0.3
-  _grabTime: 0.3
-  _grabHeight: 1

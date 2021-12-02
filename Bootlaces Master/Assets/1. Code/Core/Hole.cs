@@ -27,7 +27,7 @@ namespace BootlacesMaster
                 throw new InvalidOperationException("Hole cant attach already grabbed handle.");
 
             _attachedHandle = laceHandle;
-            laceHandle.Attach();
+            laceHandle.Attach(this);
             laceHandle.MoveTo(Position);
             
             _meshRenderer.material.color = Color.red - Color.black * _meshRenderer.material.color.a;
