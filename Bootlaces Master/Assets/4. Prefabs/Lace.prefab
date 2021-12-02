@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 9216057535551742697}
   - component: {fileID: 2694962259095368331}
   - component: {fileID: 3225033074667080508}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obi Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,78 +52,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CollisionMaterial: {fileID: 0}
-  m_SurfaceCollisions: 1
+  m_SurfaceCollisions: 0
   m_SelfCollisions: 0
-  restLength_: 2.7187545
+  restLength_: 2.8742764
   elements:
   - particle1: 0
     particle2: 1
-    restLength: 0.19137046
+    restLength: 0.18920735
     constraintForce: 0
     tearResistance: 1
   - particle1: 1
     particle2: 2
-    restLength: 0.19661188
+    restLength: 0.19206096
     constraintForce: 0
     tearResistance: 1
   - particle1: 2
     particle2: 3
-    restLength: 0.19333667
+    restLength: 0.19357738
     constraintForce: 0
     tearResistance: 1
   - particle1: 3
     particle2: 4
-    restLength: 0.19422777
+    restLength: 0.19115777
     constraintForce: 0
     tearResistance: 1
   - particle1: 4
     particle2: 5
-    restLength: 0.19457367
+    restLength: 0.19172142
     constraintForce: 0
     tearResistance: 1
   - particle1: 5
     particle2: 6
-    restLength: 0.19462772
+    restLength: 0.19183955
     constraintForce: 0
     tearResistance: 1
   - particle1: 6
     particle2: 7
-    restLength: 0.19463141
+    restLength: 0.19175835
     constraintForce: 0
     tearResistance: 1
   - particle1: 7
     particle2: 8
-    restLength: 0.19463237
+    restLength: 0.19163592
     constraintForce: 0
     tearResistance: 1
   - particle1: 8
     particle2: 9
-    restLength: 0.19463165
+    restLength: 0.19178386
     constraintForce: 0
     tearResistance: 1
   - particle1: 9
     particle2: 10
-    restLength: 0.19458912
+    restLength: 0.19186053
     constraintForce: 0
     tearResistance: 1
   - particle1: 10
     particle2: 11
-    restLength: 0.19426896
+    restLength: 0.19174682
     constraintForce: 0
     tearResistance: 1
   - particle1: 11
     particle2: 12
-    restLength: 0.1930923
+    restLength: 0.19120087
     constraintForce: 0
     tearResistance: 1
   - particle1: 12
     particle2: 13
-    restLength: 0.19684783
+    restLength: 0.1933596
     constraintForce: 0
     tearResistance: 1
   - particle1: 13
     particle2: 14
-    restLength: 0.19131224
+    restLength: 0.19226277
+    constraintForce: 0
+    tearResistance: 1
+  - particle1: 14
+    particle2: 15
+    restLength: 0.18910298
     constraintForce: 0
     tearResistance: 1
   m_RopeBlueprint: {fileID: 11400000, guid: 8a38b30088b4fad419b0a40ba90d0fd1, type: 2}
@@ -280,7 +285,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5960191411914917598}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8b45ebbf86be4df6b0e6cd933812af2, type: 3}
   m_Name: 
@@ -299,7 +304,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8745883381352788986}
   - component: {fileID: 1676602830305033734}
-  m_Layer: 0
+  - component: {fileID: 1736394648175933415}
+  m_Layer: 6
   m_Name: Lace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,15 +341,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68a3cb002c1441bb24214d622aeb40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obiRopeCursor: {fileID: 2694962259095368331}
   _obiRope: {fileID: 4569122270513551994}
   _start: {fileID: 8745883383217847543}
   _end: {fileID: 8745883382389993984}
-  _tensionLongingChange: 400
-  _tensionShorteningChange: 600
+--- !u!114 &1736394648175933415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745883381352788984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbeed55208cd4f38b1fbb2df749a675b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obiRopeCursor: {fileID: 2694962259095368331}
+  _obiRope: {fileID: 4569122270513551994}
+  _tensionLongingChange: 600
+  _tensionShorteningChange: 1000
   _tensionLongingTreshold: 0.03
   _tensionRestingTreshold: 0.005
-  _debugTension: 0
 --- !u!1 &8745883382389993985
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +375,7 @@ GameObject:
   - component: {fileID: 8745883382389993986}
   - component: {fileID: 8745883382389993987}
   - component: {fileID: 8745883382389993984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8745883382389993985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.71}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8745883381352788986}
@@ -452,6 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c88691b7f764525b2f503fdae9d688f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lace: {fileID: 0}
   _easeTime: 0.3
   _grabTime: 0.3
   _grabHeight: 1
@@ -468,7 +487,7 @@ GameObject:
   - component: {fileID: 8745883383217847541}
   - component: {fileID: 8745883383217847538}
   - component: {fileID: 8745883383217847543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,6 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c88691b7f764525b2f503fdae9d688f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lace: {fileID: 0}
   _easeTime: 0.3
   _grabTime: 0.3
   _grabHeight: 1

@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace BootlacesMaster
 {
     public class LaceIntersections : MonoBehaviour
     {
         [SerializeField] private Color _intersectionColor = Color.red;
-        
+        [SerializeField] private Color _intersectionPointColor = Color.green;
+        [SerializeField] private float _intersectionPointRadius = 0.5f;
+
         private Lace[] _laces = null;
 
         private Dictionary<ILace, Color> _colors;
@@ -28,15 +32,17 @@ namespace BootlacesMaster
         {
             if (_laces == null)
                 return;
-            
+
             foreach (var lace in _laces)
             {
                 Gizmos.color = _colors[lace];
-                
+
                 foreach (var otherLace in _laces.Except(lace.Yield()))
                 {
-                    if (lace.Intersects(otherLace))
+                    if (lace.Intersects(otherLace, out var intersection))
                     {
+                        Gizmos.color = _intersectionPointColor;
+                        Gizmos.DrawSphere(intersection, _intersectionPointRadius);
                         Gizmos.color = _intersectionColor;
                     }
                 }

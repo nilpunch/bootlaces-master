@@ -97,10 +97,5 @@ namespace BootlacesMaster
             // Otherwise, the two line segments are not parallel but do not intersect.
             return false;
         }
-
-        public static float IntersectionHeight(Vector3 begin, Vector3 end, float interpolation)
-        {
-            return Vector3.Lerp(begin, end, interpolation).y;
-        }
     }
 }

@@ -6,6 +6,7 @@ namespace BootlacesMaster
 {
     public class LaceHandle : MonoBehaviour
     {
+        [SerializeField] private Lace _lace = null;
         [SerializeField] private float _easeTime = 0.1f;
         [SerializeField] private float _grabTime = 0.5f;
         [SerializeField] private float _grabHeight = 0.5f;
@@ -13,6 +14,12 @@ namespace BootlacesMaster
         private float _originalHeight;
         
         public Vector3 Position => transform.position;
+
+        public ILace Lace => _lace;
+        
+        public bool Attached { get; private set; }
+
+        public bool Detached => Attached == false;
 
         private void Awake()
         {
@@ -25,14 +32,22 @@ namespace BootlacesMaster
             transform.DOMoveZ(position.z, _easeTime);
         }
 
-        public void Grab()
+        public void Detach()
         {
-            transform.DOMoveY(_originalHeight + _grabHeight, _easeTime);
+            if (Detached)
+                throw new InvalidOperationException("You can't detach lace that not attached.");
+            
+            Attached = false;
+            transform.DOMoveY(_originalHeight + _grabHeight, _grabTime);
         }
         
-        public void UnGrab()
+        public void Attach()
         {
-            transform.DOMoveY(_originalHeight, _easeTime);
+            if (Attached)
+                throw new InvalidOperationException("You can't attach lace that already attached.");
+
+            Attached = true;
+            transform.DOMoveY(_originalHeight, _grabTime);
         }
     }
 }

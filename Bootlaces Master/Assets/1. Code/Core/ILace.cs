@@ -11,32 +11,31 @@ namespace BootlacesMaster
 
     public static class LaceExtensions
     {
-        public static bool Intersects(this ILace first, ILace second)
+        public static bool Intersects(this ILace first, ILace second, out Vector3 intersectionPoint)
         {
-            List<Vector2> firstLace = first.Points
-                .Select(point => point.ToXZ())
-                .ToList();
-            List<Vector2> secondLace = second.Points
-                .Select(point => point.ToXZ())
-                .ToList();
+            List<Vector3> firstLace = first.Points.ToList();
+            List<Vector3> secondLace = second.Points.ToList();
 
             for (int i = 1; i < firstLace.Count; ++i)
             {
-                Vector2 beginOfLine = firstLace[i - 1];
-                Vector2 endOfLine = firstLace[i];
+                Vector3 beginOfLine = firstLace[i - 1];
+                Vector3 endOfLine = firstLace[i];
 
                 for (int j = 1; j < secondLace.Count; ++j)
                 {
-                    Vector2 otherBeginOfLine = secondLace[i - 1];
-                    Vector2 otherEndOfLine = secondLace[i];
+                    Vector3 otherBeginOfLine = secondLace[j - 1];
+                    Vector3 otherEndOfLine = secondLace[j];
 
-                    if (LineMath.TryIntersect(beginOfLine, endOfLine, otherBeginOfLine, otherEndOfLine, out _))
+                    if (LineMath.TryIntersect(beginOfLine.ToXZ(), endOfLine.ToXZ(),
+                        otherBeginOfLine.ToXZ(), otherEndOfLine.ToXZ(), out var intersection))
                     {
+                        intersectionPoint = Vector3.Lerp(beginOfLine, endOfLine, intersection.FirstLineInterpolation);
                         return true;
                     }
                 }
             }
 
+            intersectionPoint = new Vector3();
             return false;
         }
     }
