@@ -10,5 +10,6 @@ namespace BootlacesMaster
         [SerializeField] private LaceHandle _end = null;
 
         public override IEnumerable<Vector3> Points => _start.Position.Yield().Concat(_end.Position.Yield());
+        public override Color Color => Color.black;
     }
 }

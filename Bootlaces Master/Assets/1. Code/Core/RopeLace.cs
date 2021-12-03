@@ -8,13 +8,18 @@ namespace BootlacesMaster
 {
     public class RopeLace : Lace
     {
+        [SerializeField] private LaceColor _laceColor = null;
+        [SerializeField] private MeshRenderer _meshRenderer = null;
         [SerializeField] private ObiRope _obiRope = null;
-        [SerializeField] private LaceHandle _start = null;
-        [SerializeField] private LaceHandle _end = null;
 
-        private List<Vector3> _positionsCache = new List<Vector3>();
-        
         public override IEnumerable<Vector3> Points => GetParticlePositions();
+        
+        public override Color Color => _laceColor.Color;
+
+        private void Awake()
+        {
+            _meshRenderer.material.color = Color;
+        }
 
         private IEnumerable<Vector3> GetParticlePositions()
         {

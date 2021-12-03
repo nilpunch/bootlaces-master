@@ -6,12 +6,16 @@ namespace BootlacesMaster
 {
     public class LaceHandle : MonoBehaviour
     {
-        [SerializeField] private float _moveSpeed = 0.1f;
-        [SerializeField] private float _minMoveTime = 0.2f;
+        [SerializeField] private Transform _upAndDownTransform = null;
+        [SerializeField] private Transform _moveAroundTransform = null;
+        
+        [Space, SerializeField] private float _moveSpeed = 0.1f;
+        [SerializeField] private float _minMoveTime = 0.05f;
+        [SerializeField] private float _maxMoveTime = 0.5f;
         [SerializeField] private float _grabTime = 0.5f;
         [SerializeField] private float _grabHeight = 0.5f;
 
-        public Vector3 Position => transform.position;
+        public Vector3 Position => _upAndDownTransform.position;
         
         public bool Attached { get; private set; }
 
@@ -19,11 +23,13 @@ namespace BootlacesMaster
 
         public void MoveTo(Vector3 position)
         {
-            Vector3 endPosition = position + Vector3.up * _grabHeight;
-            float moveTime = Vector3.Distance(transform.position, endPosition) / _moveSpeed;
+            if (Attached)
+                throw new InvalidOperationException("You can't move attached things.");
+            
+            float moveTime = Vector3.Distance(_moveAroundTransform.position, position) / _moveSpeed;
 
-            transform.DOKill();
-            transform.DOMove(endPosition, Mathf.Max(_minMoveTime, moveTime));
+            _moveAroundTransform.DOKill();
+            _moveAroundTransform.DOMove(position, Mathf.Clamp(moveTime, _minMoveTime, _maxMoveTime));
         }
 
         public void Detach()
@@ -32,6 +38,10 @@ namespace BootlacesMaster
                 throw new InvalidOperationException("You can't detach lace that not attached.");
             
             Attached = false;
+
+            _upAndDownTransform.DOKill();
+            _upAndDownTransform.DOLocalMoveY(_grabHeight, _grabTime)
+                .SetEase(Ease.OutQuad);
         }
         
         public void Attach(Hole hole)
@@ -40,14 +50,16 @@ namespace BootlacesMaster
                 throw new InvalidOperationException("You can't attach lace that already attached.");
 
             Attached = true;
-            
-            Vector3 endPosition = hole.Position + Vector3.up * _grabHeight;
-            float moveTime = Vector3.Distance(transform.position, endPosition) / _moveSpeed;
 
-            transform.DOKill();
+            float moveTime = Vector3.Distance(_moveAroundTransform.position, hole.Position) / _moveSpeed;
+
+            _upAndDownTransform.DOKill();
+            _moveAroundTransform.DOKill();
+            
             DOTween.Sequence()
-                .Append(transform.DOMove(endPosition, Mathf.Max(_minMoveTime, moveTime)))
-                .Append(transform.DOMove(hole.Position, _grabTime))
+                .Append(_moveAroundTransform.DOMove(hole.Position, Mathf.Clamp(moveTime, _minMoveTime, _maxMoveTime)))
+                .Append(_upAndDownTransform.DOLocalMoveY(0f, _grabTime)
+                    .SetEase(Ease.InQuad))
                 .SetTarget(transform);
         }
     }

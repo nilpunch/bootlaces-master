@@ -8,9 +8,9 @@ namespace BootlacesMaster
     {
         [SerializeField] private InputRouter _input = null;
         [SerializeField] private Camera _camera = null;
-        [SerializeField] private LayerMask _holesLayer = new LayerMask();
         [SerializeField] private LayerMask _inputLayer = new LayerMask();
-
+        [SerializeField] private float _grabRange = 3f;
+        
         private LaceHandle _grabbedHandle = null;
         private Hole _lastDetachedHole = null;
         private Hole[] _holes;
@@ -42,7 +42,7 @@ namespace BootlacesMaster
                 .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
                 .FirstOrDefault();
 
-            if (nearbyHole != null)
+            if (nearbyHole != null && Vector3.Distance(nearbyHole.Position, worldPosition) < _grabRange)
             {
                 _lastDetachedHole = nearbyHole;
                 _grabbedHandle = nearbyHole.Detach();
