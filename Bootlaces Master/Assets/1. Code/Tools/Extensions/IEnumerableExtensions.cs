@@ -48,13 +48,47 @@ public static class IEnumerableExtensions
         return items.IndexOf(i => EqualityComparer<T>.Default.Equals(item, i));
     }
     
-    public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
+    public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
     {
-        if (items == null)
-            throw new ArgumentNullException(nameof(items));
+        if (source == null)
+            throw new ArgumentNullException(nameof(source));
 
-        foreach (var item in items)
+        foreach (var item in source)
             action.Invoke(item);
+    }
+    
+    public static IEnumerable<TResult> Pairwise<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TSource, TResult> resultSelector)
+    {
+        using var it = source.GetEnumerator();
+
+        if (it.MoveNext() == false)
+            yield break;
+        
+        TSource previous = it.Current;
+
+        while (it.MoveNext())
+        {
+            yield return resultSelector(previous, it.Current);
+            previous = it.Current;
+        }
+    }
+    
+    public static IEnumerable<TResult> DistinctPairs<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TSource, TResult> resultSelector)
+    {
+        using var first = source.GetEnumerator();
+        using var second = source.GetEnumerator();
+
+        while (first.MoveNext())
+        {
+            second.Reset();
+            
+            while (second.MoveNext())
+                if (EqualityComparer<TSource>.Default.Equals(second.Current, first.Current))
+                    break;
+
+            while (second.MoveNext())
+                yield return resultSelector(first.Current, second.Current);
+        }
     }
     
     public static T GetMin<T>(this IEnumerable<T> items, Func<T, float> action)

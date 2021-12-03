@@ -20,14 +20,14 @@ namespace BootlacesMaster
         public struct Intersection
         {
             public readonly Vector2 Point;
-            public readonly float FirstLineInterpolation;
-            public readonly float SecondLineInterpolation;
+            public readonly float FirstSegmentInterpolation;
+            public readonly float SecondSegmentInterpolation;
 
-            public Intersection(Vector2 point, float firstLineInterpolation, float secondLineInterpolation)
+            public Intersection(Vector2 point, float firstSegmentInterpolation, float secondSegmentInterpolation)
             {
                 Point = point;
-                FirstLineInterpolation = firstLineInterpolation;
-                SecondLineInterpolation = secondLineInterpolation;
+                FirstSegmentInterpolation = firstSegmentInterpolation;
+                SecondSegmentInterpolation = secondSegmentInterpolation;
             }
         }
 

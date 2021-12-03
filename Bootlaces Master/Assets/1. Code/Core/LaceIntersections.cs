@@ -8,8 +8,8 @@ namespace BootlacesMaster
 {
     public class LaceIntersections : MonoBehaviour
     {
-        [SerializeField] private Color _intersectionColor = Color.red;
-        [SerializeField] private Color _intersectionPointColor = Color.green;
+        [SerializeField] private Color _intersectionUpperPointColor = Color.green;
+        [SerializeField] private Color _intersectionLowerPointColor = Color.red;
         [SerializeField] private float _intersectionPointRadius = 0.5f;
 
         private Lace[] _laces = null;
@@ -24,7 +24,7 @@ namespace BootlacesMaster
 
             foreach (var lace in _laces)
             {
-                _colors.Add(lace, Random.ColorHSV(0f, 1f, 0.7f, 0.7f, 0.8f, 0.8f));
+                _colors.Add(lace, Random.ColorHSV(0f, 1f, 0.9f, 0.9f, 0.9f, 0.9f));
             }
         }
 
@@ -32,26 +32,32 @@ namespace BootlacesMaster
         {
             if (_laces == null)
                 return;
-
-            foreach (var lace in _laces)
+            
+            foreach (var (firstLace, secondLace) in _laces.DistinctPairs((first, second) => (first, second)))
             {
-                Gizmos.color = _colors[lace];
-
-                foreach (var otherLace in _laces.Except(lace.Yield()))
+                Gizmos.color = _colors[firstLace];
+                foreach (var segment in firstLace.Points.ToSegments())
+                    Gizmos.DrawLine(segment.Begin, segment.End);
+                
+                if (firstLace.Intersects(secondLace, out var intersections) == false)
+                    continue;
+                
+                foreach (var intersection in intersections)
                 {
-                    if (lace.Intersects(otherLace, out var intersection))
+                    if (intersection.FirstLacePoint.y > intersection.SecondLacePoint.y)
                     {
-                        Gizmos.color = _intersectionPointColor;
-                        Gizmos.DrawSphere(intersection, _intersectionPointRadius);
-                        Gizmos.color = _intersectionColor;
+                        Gizmos.color = _intersectionUpperPointColor;
+                        Gizmos.DrawSphere(intersection.FirstLacePoint, _intersectionPointRadius);
+                        Gizmos.color = _intersectionLowerPointColor;
+                        Gizmos.DrawSphere(intersection.SecondLacePoint, _intersectionPointRadius);
                     }
-                }
-
-                var positions = lace.Points.ToList();
-
-                for (int i = 1; i < positions.Count; ++i)
-                {
-                    Gizmos.DrawLine(positions[i - 1], positions[i]);
+                    else
+                    {
+                        Gizmos.color = _intersectionUpperPointColor;
+                        Gizmos.DrawSphere(intersection.SecondLacePoint, _intersectionPointRadius);
+                        Gizmos.color = _intersectionLowerPointColor;
+                        Gizmos.DrawSphere(intersection.FirstLacePoint, _intersectionPointRadius);
+                    }
                 }
             }
         }

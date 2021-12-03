@@ -5,18 +5,11 @@ namespace BootlacesMaster
 {
     public class Hole : MonoBehaviour
     {
-        [SerializeField] private MeshRenderer _meshRenderer = null;
-        
         private LaceHandle _attachedHandle;
         
         public bool HasHandle => _attachedHandle != null;
 
         public Vector3 Position => transform.position;
-
-        private void Awake()
-        {
-            _meshRenderer.material.color = Color.green - Color.black * _meshRenderer.material.color.a;
-        }
 
         public void Attach(LaceHandle laceHandle)
         {
@@ -28,9 +21,6 @@ namespace BootlacesMaster
 
             _attachedHandle = laceHandle;
             laceHandle.Attach(this);
-            laceHandle.MoveTo(Position);
-            
-            _meshRenderer.material.color = Color.red - Color.black * _meshRenderer.material.color.a;
         }
 
         public LaceHandle Detach()
@@ -42,8 +32,6 @@ namespace BootlacesMaster
             
             _attachedHandle.Detach();
             _attachedHandle = null;
-
-            _meshRenderer.material.color = Color.green - Color.black * _meshRenderer.material.color.a;
 
             return handle;
         }

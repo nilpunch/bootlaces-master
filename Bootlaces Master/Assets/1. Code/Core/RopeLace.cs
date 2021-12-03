@@ -11,23 +11,17 @@ namespace BootlacesMaster
         [SerializeField] private ObiRope _obiRope = null;
         [SerializeField] private LaceHandle _start = null;
         [SerializeField] private LaceHandle _end = null;
+
+        private List<Vector3> _positionsCache = new List<Vector3>();
         
         public override IEnumerable<Vector3> Points => GetParticlePositions();
 
         private IEnumerable<Vector3> GetParticlePositions()
         {
-            List<Vector3> positions = new List<Vector3>();
-            
-            for (int i = 0; i < _obiRope.elements.Count; ++i)
-            {
-                var element = _obiRope.elements[i];
+            foreach (var element in _obiRope.elements)
+                yield return _obiRope.GetParticlePosition(element.particle1);
 
-                positions.Add(_obiRope.GetParticlePosition(element.particle1));
-            }
-            
-            positions.Add(_obiRope.GetParticlePosition(_obiRope.elements[_obiRope.elements.Count - 1].particle2));
-
-            return positions;
+            yield return _obiRope.GetParticlePosition(_obiRope.elements[_obiRope.elements.Count - 1].particle2);
         }
     }
 }

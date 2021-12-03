@@ -288,7 +288,7 @@ MonoBehaviour:
   render: 1
   shader: {fileID: 4800000, guid: 801733041f66b49e1b3c2101471db877, type: 3}
   particleColor: {r: 1, g: 1, b: 1, a: 1}
-  radiusScale: 1
+  radiusScale: 0.2
 --- !u!1 &8745883381352788984
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,8 +403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c88691b7f764525b2f503fdae9d688f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lace: {fileID: 0}
-  _easeTime: 0.3
+  _moveSpeed: 10
+  _minMoveTime: 0.3
   _grabTime: 0.3
   _grabHeight: 1
 --- !u!33 &8745883382389993989
@@ -515,8 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c88691b7f764525b2f503fdae9d688f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lace: {fileID: 0}
-  _easeTime: 0.3
+  _moveSpeed: 10
+  _minMoveTime: 0.3
   _grabTime: 0.3
   _grabHeight: 1
 --- !u!33 &8745883383217847540

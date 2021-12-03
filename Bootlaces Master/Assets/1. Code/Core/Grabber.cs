@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace BootlacesMaster
@@ -8,9 +9,16 @@ namespace BootlacesMaster
         [SerializeField] private InputRouter _input = null;
         [SerializeField] private Camera _camera = null;
         [SerializeField] private LayerMask _holesLayer = new LayerMask();
+        [SerializeField] private LayerMask _inputLayer = new LayerMask();
 
         private LaceHandle _grabbedHandle = null;
         private Hole _lastDetachedHole = null;
+        private Hole[] _holes;
+
+        private void Awake()
+        {
+            _holes = FindObjectsOfType<Hole>();
+        }
 
         private void OnEnable()
         {
@@ -28,16 +36,17 @@ namespace BootlacesMaster
 
         private void OnPressed()
         {
-            Ray ray = _camera.ScreenPointToRay(_input.Position);
+            Vector3 worldPosition = CalculateWorldPosition(_input.Position);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue, _holesLayer))
+            Hole nearbyHole = _holes.Where(hole => hole.HasHandle)
+                .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
+                .FirstOrDefault();
+
+            if (nearbyHole != null)
             {
-                if (hitInfo.collider.TryGetComponent<Hole>(out var hole) && hole.HasHandle)
-                {
-                    _lastDetachedHole = hole;
-                    _grabbedHandle = hole.Detach();
-                    _grabbedHandle.MoveTo(CalculateWorldPosition(_input.Position));
-                }
+                _lastDetachedHole = nearbyHole;
+                _grabbedHandle = nearbyHole.Detach();
+                _grabbedHandle.MoveTo(worldPosition);
             }
         }
 
@@ -57,17 +66,18 @@ namespace BootlacesMaster
             LaceHandle handle = _grabbedHandle;
             _grabbedHandle = null;
             
-            Ray ray = _camera.ScreenPointToRay(_input.Position);
+            Vector3 worldPosition = CalculateWorldPosition(_input.Position);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue, _holesLayer))
+            Hole nearbyHole = _holes.Where(hole => hole.HasHandle == false)
+                .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
+                .FirstOrDefault();
+
+            if (nearbyHole != null)
             {
-                if (hitInfo.collider.TryGetComponent<Hole>(out var hole) && hole.HasHandle == false)
-                {
-                    hole.Attach(handle);
-                    return;
-                }
+                nearbyHole.Attach(handle);
+                return;
             }
-            
+
             _lastDetachedHole.Attach(handle);
         }
 
@@ -75,8 +85,8 @@ namespace BootlacesMaster
         {
             Ray ray = _camera.ScreenPointToRay(screenPosition);
 
-            if (new Plane(Vector3.up, Vector3.zero).Raycast(ray, out var distance))
-                return ray.GetPoint(distance);
+            if (Physics.Raycast(ray, out var hit, float.MaxValue, _inputLayer))
+                return hit.point;
 
             return Vector3.zero;
         }
