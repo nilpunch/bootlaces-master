@@ -13,6 +13,7 @@ namespace BootlacesMaster
         [SerializeField] private float _tensionLongingTreshold = 0.03f;
         [SerializeField] private float _tensionRestingTreshold = 0.005f;
         [SerializeField] private float _minDelta = 0.05f;
+        [SerializeField] private float _maxDelta = 1f;
         
         private float _startLenght;
 
@@ -26,11 +27,20 @@ namespace BootlacesMaster
             _lastLength = _startLenght;
         }
 
+        public void Enable()
+        {
+            enabled = true;
+            _lastLength = _obiRope.restLength;
+        }
+        
+        public void Disable()
+        {
+            enabled = false;
+        }
+
         private void Update()
         {
-            float lengthFromDistance = _lastLength;// Mathf.Max(Vector3.Distance(_start.Position, _end.Position), _startLenght);
-
-            float delta = lengthFromDistance - _lastLength;
+            float delta = 0f;
             
             float tension = _obiRope.CalculateLength() / _obiRope.restLength - 1f;
 
@@ -47,7 +57,7 @@ namespace BootlacesMaster
             
             if (Math.Abs(delta) >= _minDelta)
             {
-                _lastLength = Mathf.Max(_lastLength + delta, _startLenght);
+                _lastLength = Mathf.Max(_lastLength + Mathf.Clamp(delta, -_maxDelta, _maxDelta), _startLenght);
                 _obiRopeCursor.ChangeLength(_lastLength);
                 CursorLengthChanged?.Invoke(_lastLength);
             }

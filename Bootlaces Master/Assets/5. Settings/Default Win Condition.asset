@@ -14,20 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _winConditions:
     PlacementConditions:
-    - _referenceColor: {fileID: 0}
-      Color: {r: 1, g: 0, b: 0, a: 1}
+    - Color: {r: 1, g: 0, b: 0, a: 1}
       FirstHole: 2
       SecondHole: 1
-    - _referenceColor: {fileID: 0}
-      Color: {r: 0, g: 1, b: 1, a: 1}
+    - Color: {r: 0.5, g: 1, b: 0, a: 1}
       FirstHole: 6
       SecondHole: 5
-    - _referenceColor: {fileID: 0}
-      Color: {r: 1, g: 1, b: 0, a: 1}
+    - Color: {r: 0, g: 0.6666665, b: 1, a: 1}
       FirstHole: 8
       SecondHole: 7
-    - _referenceColor: {fileID: 0}
-      Color: {r: 0, g: 1, b: 0, a: 1}
+    - Color: {r: 1, g: 1, b: 0, a: 1}
       FirstHole: 4
       SecondHole: 3
     EntanglementConditions: []

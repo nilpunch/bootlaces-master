@@ -12,7 +12,7 @@ namespace Obi
         [HideInInspector] [SerializeField] public ObiPath path = new ObiPath();
         public float thickness = 0.1f;
 
-        [Range(0, 1)]
+        [Range(0, 2)]
         public float resolution = 1;
 
         [HideInInspector] [SerializeField] protected float m_InterParticleDistance;

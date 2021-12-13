@@ -36,7 +36,8 @@ namespace BootlacesMaster
 
         private void OnPressed()
         {
-            Vector3 worldPosition = CalculateWorldPosition(_input.Position);
+            if (CalculateWorldPosition(_input.Position, out var worldPosition) == false)
+                return;
 
             Hole nearbyHole = _holes.Where(hole => hole.HasHandle)
                 .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
@@ -55,7 +56,8 @@ namespace BootlacesMaster
             if (_grabbedHandle == null)
                 return;
 
-            _grabbedHandle.MoveTo(CalculateWorldPosition(_input.Position));
+            if (CalculateWorldPosition(_input.Position, out var worldPosition))
+                _grabbedHandle.MoveTo(worldPosition);
         }
 
         private void OnReleased()
@@ -65,8 +67,12 @@ namespace BootlacesMaster
 
             LaceHandle handle = _grabbedHandle;
             _grabbedHandle = null;
-            
-            Vector3 worldPosition = CalculateWorldPosition(_input.Position);
+
+            if (CalculateWorldPosition(_input.Position, out var worldPosition) == false)
+            {
+                _lastDetachedHole.Attach(handle);
+                return;
+            }
 
             Hole nearbyHole = _holes.Where(hole => hole.HasHandle == false)
                 .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
@@ -81,14 +87,18 @@ namespace BootlacesMaster
             _lastDetachedHole.Attach(handle);
         }
 
-        private Vector3 CalculateWorldPosition(Vector2 screenPosition)
+        private bool CalculateWorldPosition(Vector2 screenPosition, out Vector3 worldPosition)
         {
             Ray ray = _camera.ScreenPointToRay(screenPosition);
 
             if (Physics.Raycast(ray, out var hit, float.MaxValue, _inputLayer))
-                return hit.point;
-
-            return Vector3.zero;
+            {
+                worldPosition = hit.point;
+                return true;
+            }
+            
+            worldPosition = Vector3.zero;
+            return false;
         }
     }
 }

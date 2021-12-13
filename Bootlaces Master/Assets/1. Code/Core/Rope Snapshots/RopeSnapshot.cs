@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BootlacesMaster
 {
+    [Serializable]
     public class RopeSnapshot
     {
         public List<float> LengthChanges;

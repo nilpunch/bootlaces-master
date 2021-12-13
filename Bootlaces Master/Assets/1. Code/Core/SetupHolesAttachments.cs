@@ -21,7 +21,7 @@ namespace BootlacesMaster
                     .FirstOrDefault();
                 
                 if (freeHandle != null)
-                    hole.Attach(freeHandle);
+                    hole.InitialAttach(freeHandle);
             }
         }
     }

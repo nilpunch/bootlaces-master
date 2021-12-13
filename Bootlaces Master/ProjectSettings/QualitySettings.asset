@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 2
+  m_CurrentQuality: 3
   m_QualitySettings:
   - serializedVersion: 2
     name: Very Low
@@ -119,7 +119,7 @@ QualitySettings:
     pixelLightCount: 2
     shadows: 2
     shadowResolution: 1
-    shadowProjection: 1
+    shadowProjection: 0
     shadowCascades: 2
     shadowDistance: 40
     shadowNearPlaneOffset: 3
@@ -230,7 +230,7 @@ QualitySettings:
     PS4: 5
     PSP2: 2
     Stadia: 5
-    Standalone: 5
+    Standalone: 3
     WebGL: 3
     Windows Store Apps: 5
     XboxOne: 5

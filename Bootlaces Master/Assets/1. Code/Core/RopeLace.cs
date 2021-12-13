@@ -8,7 +8,7 @@ namespace BootlacesMaster
 {
     public class RopeLace : Lace
     {
-        [SerializeField] private LaceColor _laceColor = null;
+        [SerializeField] private Color _laceColor = Color.red;
         [SerializeField] private MeshRenderer _meshRenderer = null;
         [SerializeField] private ObiRope _obiRope = null;
         [SerializeField] private LaceHandle _firstHandle = null;
@@ -16,7 +16,7 @@ namespace BootlacesMaster
 
         public override IEnumerable<Vector3> Points => GetParticlePositions();
         
-        public override Color Color => _laceColor.Color;
+        public override Color Color => _laceColor;
         
         public override int FirstHole => _firstHandle.AttachedHoleIndex;
         
@@ -25,6 +25,14 @@ namespace BootlacesMaster
         private void Awake()
         {
             _meshRenderer.material.color = Color;
+        }
+
+        public void Init(Color color, Hole firstHole, Hole secondHole)
+        {
+            _laceColor = color;
+            _meshRenderer.material.color = Color;
+            firstHole.InitialAttach(_firstHandle);
+            secondHole.InitialAttach(_secondHandle);
         }
 
         private IEnumerable<Vector3> GetParticlePositions()

@@ -39,8 +39,8 @@ public class SwipeInput : MonoBehaviour
         _pointerInput = _mousePointerInput;
         _touchPointerInput.enabled = false;
 #else
-        _pointerInputRouter = _touchInputRouter;
-        _mouseInputRouter.enabled = false;
+        _pointerInput = _touchPointerInput;
+        _touchPointerInput.enabled = false;
 #endif
     }
 
