@@ -11,29 +11,29 @@ public class RobotArmController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (Input.GetKey(KeyCode.A)){
+		if (UnityEngine.Input.GetKey(KeyCode.A)){
 			section1.Rotate(0,speed*Time.deltaTime,0,Space.World);
 		}
-		if (Input.GetKey(KeyCode.D)){
+		if (UnityEngine.Input.GetKey(KeyCode.D)){
 			section1.Rotate(0,-speed*Time.deltaTime,0,Space.World);
 		}
 
-		if (Input.GetKey(KeyCode.W)){
+		if (UnityEngine.Input.GetKey(KeyCode.W)){
 			section1.Rotate(0,speed*Time.deltaTime,0,Space.Self);
 		}
-		if (Input.GetKey(KeyCode.S)){
+		if (UnityEngine.Input.GetKey(KeyCode.S)){
 			section1.Rotate(0,-speed*Time.deltaTime,0,Space.Self);
 		}
-		if (Input.GetKey(KeyCode.T)){
+		if (UnityEngine.Input.GetKey(KeyCode.T)){
 			section2.Rotate(0,speed*Time.deltaTime,0,Space.Self);
 		}
-		if (Input.GetKey(KeyCode.G)){
+		if (UnityEngine.Input.GetKey(KeyCode.G)){
 			section2.Rotate(0,-speed*Time.deltaTime,0,Space.Self);
 		}
-		if (Input.GetKey(KeyCode.Y)){
+		if (UnityEngine.Input.GetKey(KeyCode.Y)){
 			actuator.Rotate(0,speed*Time.deltaTime,0,Space.Self);
 		}
-		if (Input.GetKey(KeyCode.H)){
+		if (UnityEngine.Input.GetKey(KeyCode.H)){
 			actuator.Rotate(0,-speed*Time.deltaTime,0,Space.Self);
 		}
 

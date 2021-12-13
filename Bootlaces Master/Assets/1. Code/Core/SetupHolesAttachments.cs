@@ -16,7 +16,7 @@ namespace BootlacesMaster
                 var results = Physics.OverlapSphere(hole.Position, _castRadius);
 
                 LaceHandle freeHandle = results.Select(target => target.GetComponent<LaceHandle>())
-                    .Where(handle => handle != null && handle.Detached)
+                    .Where(handle => handle != null && handle.gameObject.activeInHierarchy && handle.Detached)
                     .OrderBy(handle => Vector3.Distance(handle.Position, hole.Position))
                     .FirstOrDefault();
                 

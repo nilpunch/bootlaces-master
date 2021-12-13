@@ -32,13 +32,18 @@ namespace BootlacesMaster
         {
             if (_laces == null)
                 return;
+
+            // Coloring
+            foreach (var lace in _laces)
+            {
+                Gizmos.color = _colors[lace];
+                foreach (var segment in lace.Points.ToSegments())
+                    Gizmos.DrawLine(segment.Begin, segment.End);
+            }
             
+            // Showing intersections
             foreach (var (firstLace, secondLace) in _laces.DistinctPairs((first, second) => (first, second)))
             {
-                Gizmos.color = _colors[firstLace];
-                foreach (var segment in firstLace.Points.ToSegments())
-                    Gizmos.DrawLine(segment.Begin, segment.End);
-                
                 if (firstLace.Intersects(secondLace, out var intersections) == false)
                     continue;
                 

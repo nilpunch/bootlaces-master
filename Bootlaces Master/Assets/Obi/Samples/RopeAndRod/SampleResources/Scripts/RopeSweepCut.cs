@@ -58,20 +58,20 @@ public class RopeSweepCut : MonoBehaviour
     private void ProcessInput()
     {
         // When the user clicks the mouse, start a line cut:
-        if (Input.GetMouseButtonDown(0))
+        if (UnityEngine.Input.GetMouseButtonDown(0))
         {
-            cutStartPosition = Input.mousePosition;
+            cutStartPosition = UnityEngine.Input.mousePosition;
             lineRenderer.SetPosition(0, cam.ScreenToWorldPoint(new Vector3(cutStartPosition.x, cutStartPosition.y, 0.5f)));
             lineRenderer.enabled = true;
         }
 
         if (lineRenderer.enabled)
-            lineRenderer.SetPosition(1, cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.5f)));
+            lineRenderer.SetPosition(1, cam.ScreenToWorldPoint(new Vector3(UnityEngine.Input.mousePosition.x, UnityEngine.Input.mousePosition.y, 0.5f)));
 
         // When the user lifts the mouse, proceed to cut.
-        if (Input.GetMouseButtonUp(0))
+        if (UnityEngine.Input.GetMouseButtonUp(0))
         {
-            ScreenSpaceCut(cutStartPosition, Input.mousePosition);
+            ScreenSpaceCut(cutStartPosition, UnityEngine.Input.mousePosition);
             lineRenderer.enabled = false;
         }
     }

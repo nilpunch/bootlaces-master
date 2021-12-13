@@ -22,22 +22,22 @@ public class CursorController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if (Input.GetKey(KeyCode.W) && cursor != null)
+		if (UnityEngine.Input.GetKey(KeyCode.W) && cursor != null)
         {
             if (rope.restLength > minLength)
                 cursor.ChangeLength(rope.restLength - speed * Time.deltaTime);
 		}
 
-		if (Input.GetKey(KeyCode.S) && cursor != null)
+		if (UnityEngine.Input.GetKey(KeyCode.S) && cursor != null)
         {
             cursor.ChangeLength(rope.restLength + speed * Time.deltaTime);
 		}
 
-		if (Input.GetKey(KeyCode.A)){
+		if (UnityEngine.Input.GetKey(KeyCode.A)){
 			rope.transform.Translate(Vector3.left * Time.deltaTime,Space.World);
 		}
 
-		if (Input.GetKey(KeyCode.D)){
+		if (UnityEngine.Input.GetKey(KeyCode.D)){
 			rope.transform.Translate(Vector3.right * Time.deltaTime,Space.World);
 		}
 

@@ -16,20 +16,20 @@ public class CraneController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(KeyCode.W)){
+		if (UnityEngine.Input.GetKey(KeyCode.W)){
 			if (rope.restLength > 6.5f)
 				cursor.ChangeLength(rope.restLength - 1f * Time.deltaTime);
 		}
 
-		if (Input.GetKey(KeyCode.S)){
+		if (UnityEngine.Input.GetKey(KeyCode.S)){
 			cursor.ChangeLength(rope.restLength + 1f * Time.deltaTime);
 		}
 
-		if (Input.GetKey(KeyCode.A)){
+		if (UnityEngine.Input.GetKey(KeyCode.A)){
 			transform.Rotate(0,Time.deltaTime*15f,0);
 		}
 
-		if (Input.GetKey(KeyCode.D)){
+		if (UnityEngine.Input.GetKey(KeyCode.D)){
 			transform.Rotate(0,-Time.deltaTime*15f,0);
 		}
 	}

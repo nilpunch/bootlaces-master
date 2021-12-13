@@ -37,13 +37,13 @@ namespace Obi{
         {
             if (!m_Jump)
             {
-                m_Jump = Input.GetButtonDown("Jump");
+                m_Jump = UnityEngine.Input.GetButtonDown("Jump");
             }
 
 			// read inputs
-			float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-            bool crouch = Input.GetKey(KeyCode.C);
+			float h = UnityEngine.Input.GetAxis("Horizontal");
+            float v = UnityEngine.Input.GetAxis("Vertical");
+            bool crouch = UnityEngine.Input.GetKey(KeyCode.C);
 
             // calculate move direction to pass to character
             if (m_Cam != null)
@@ -59,7 +59,7 @@ namespace Obi{
             }
 			#if !MOBILE_INPUT
 				// walk speed multiplier
-	       	 	if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
+	       	 	if (UnityEngine.Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
 			#endif
 	
             // pass all parameters to the character control script

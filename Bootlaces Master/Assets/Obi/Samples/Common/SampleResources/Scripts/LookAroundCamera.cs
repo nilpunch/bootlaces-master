@@ -53,21 +53,21 @@ namespace Obi
         {
             Vector3 delta = Vector3.zero;
 
-            if (Input.GetKey(KeyCode.W))
+            if (UnityEngine.Input.GetKey(KeyCode.W))
                 delta += cam.transform.forward;
-            if (Input.GetKey(KeyCode.A))
+            if (UnityEngine.Input.GetKey(KeyCode.A))
                 delta -= cam.transform.right;
-            if (Input.GetKey(KeyCode.S))
+            if (UnityEngine.Input.GetKey(KeyCode.S))
                 delta -= cam.transform.forward;
-            if (Input.GetKey(KeyCode.D))
+            if (UnityEngine.Input.GetKey(KeyCode.D))
                 delta += cam.transform.right;
 
             currentShot.position += delta * Time.deltaTime * movementSpeed;
 
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (UnityEngine.Input.GetKey(KeyCode.Mouse0))
             {
-                float deltaX = Input.GetAxis("Mouse X") * rotationSpeed;
-                float deltaY = Input.GetAxis("Mouse Y") * rotationSpeed;
+                float deltaX = UnityEngine.Input.GetAxis("Mouse X") * rotationSpeed;
+                float deltaY = UnityEngine.Input.GetAxis("Mouse Y") * rotationSpeed;
                 Quaternion fwd = currentShot.rotation * Quaternion.AngleAxis(deltaX, Vector3.up) * Quaternion.AngleAxis(deltaY, -Vector3.right);
                 LookAt(currentShot.position + fwd * Vector3.forward, Vector3.up);
             }

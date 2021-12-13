@@ -5,11 +5,15 @@ namespace BootlacesMaster
 {
     public class Hole : MonoBehaviour
     {
+        [SerializeField] private int _index = 1;
+        
         private LaceHandle _attachedHandle;
         
         public bool HasHandle => _attachedHandle != null;
 
         public Vector3 Position => transform.position;
+
+        public int Index => _index;
 
         public void Attach(LaceHandle laceHandle)
         {

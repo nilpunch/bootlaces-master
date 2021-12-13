@@ -9,7 +9,7 @@ public class AddRandomVelocity : MonoBehaviour {
 	public float intensity = 5;
 	
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space)){
+		if (UnityEngine.Input.GetKeyDown(KeyCode.Space)){
 			GetComponent<ObiActor>().AddForce(UnityEngine.Random.onUnitSphere*intensity,ForceMode.VelocityChange);
 		}
 	}

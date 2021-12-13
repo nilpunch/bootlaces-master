@@ -21,11 +21,11 @@ public class RuntimeRopeGeneratorUse : MonoBehaviour
 
 	public void Update(){
 	
-		if (Input.GetKey(KeyCode.W)){
+		if (UnityEngine.Input.GetKey(KeyCode.W)){
 			rg.ChangeRopeLength(- Time.deltaTime);
 		}
 
-		if (Input.GetKey(KeyCode.S)){
+		if (UnityEngine.Input.GetKey(KeyCode.S)){
 			rg.ChangeRopeLength(  Time.deltaTime);
 		}
 		

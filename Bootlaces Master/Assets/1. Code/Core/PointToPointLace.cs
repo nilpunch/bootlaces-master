@@ -11,5 +11,8 @@ namespace BootlacesMaster
 
         public override IEnumerable<Vector3> Points => _start.Position.Yield().Concat(_end.Position.Yield());
         public override Color Color => Color.black;
+
+        public override int FirstHole => -1;
+        public override int SecondHole => -1;
     }
 }

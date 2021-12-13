@@ -69,7 +69,7 @@ public class GrapplingHook : MonoBehaviour
     {
 
         // Get the mouse position in the scene, in the same XY plane as this object:
-        Vector3 mouse = Input.mousePosition;
+        Vector3 mouse = UnityEngine.Input.mousePosition;
         mouse.z = transform.position.z - Camera.main.transform.position.z;
         Vector3 mouseInScene = Camera.main.ScreenToWorldPoint(mouse);
 
@@ -130,7 +130,7 @@ public class GrapplingHook : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (UnityEngine.Input.GetMouseButtonDown(0))
         {
             if (!rope.isLoaded)
                 LaunchHook();
@@ -140,11 +140,11 @@ public class GrapplingHook : MonoBehaviour
 
         if (rope.isLoaded)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (UnityEngine.Input.GetKey(KeyCode.W))
             {
                 cursor.ChangeLength(rope.restLength - hookExtendRetractSpeed * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.S))
+            if (UnityEngine.Input.GetKey(KeyCode.S))
             {
                 cursor.ChangeLength(rope.restLength + hookExtendRetractSpeed * Time.deltaTime);
             }

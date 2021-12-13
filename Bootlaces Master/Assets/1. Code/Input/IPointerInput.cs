@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public interface IPointerInputRouter
+public interface IPointerInput
 {
     Vector2 Position { get; }
     Vector2 Delta { get; }

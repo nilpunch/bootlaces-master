@@ -6,7 +6,7 @@ namespace BootlacesMaster
 {
     public class Grabber : MonoBehaviour
     {
-        [SerializeField] private InputRouter _input = null;
+        [SerializeField] private CrossPlatformPointerInput _input = null;
         [SerializeField] private Camera _camera = null;
         [SerializeField] private LayerMask _inputLayer = new LayerMask();
         [SerializeField] private float _grabRange = 3f;

@@ -20,7 +20,7 @@ public class ActorSpawner : MonoBehaviour {
 
 		timeFromLastSpawn += Time.deltaTime;
 
-		if (Input.GetMouseButtonDown(0) && instances < maxInstances && timeFromLastSpawn > spawnDelay)
+		if (UnityEngine.Input.GetMouseButtonDown(0) && instances < maxInstances && timeFromLastSpawn > spawnDelay)
 		{
 			GameObject go = Instantiate(template.gameObject,transform.position,Quaternion.identity);
             go.transform.SetParent(transform.parent);

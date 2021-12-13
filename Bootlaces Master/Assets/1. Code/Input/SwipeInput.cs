@@ -17,8 +17,8 @@ public class SwipeInput : MonoBehaviour
     [SerializeField] private bool _allowPingPongSwipe = false;
 
     [Header("Dependencies")]
-    [SerializeField, UsedImplicitly] private MouseInputRouter _mouseInputRouter = null; 
-    [SerializeField, UsedImplicitly] private TouchInputRouter _touchInputRouter = null; 
+    [SerializeField, UsedImplicitly] private MousePointerInput _mousePointerInput = null; 
+    [SerializeField, UsedImplicitly] private TouchPointerInput _touchPointerInput = null; 
     
     private Vector2 _fingerLastPosition;
     private Vector2 _delta;
@@ -27,7 +27,7 @@ public class SwipeInput : MonoBehaviour
     private SwipeDirection _lastSwipe;
     private bool _swipedOnce;
     
-    private IPointerInputRouter _pointerInputRouter;
+    private IPointerInput _pointerInput;
     
     public event Action<SwipeDirection> Swiped;
 
@@ -36,8 +36,8 @@ public class SwipeInput : MonoBehaviour
         _swipedOnce = false;
         
 #if UNITY_EDITOR
-        _pointerInputRouter = _mouseInputRouter;
-        _touchInputRouter.enabled = false;
+        _pointerInput = _mousePointerInput;
+        _touchPointerInput.enabled = false;
 #else
         _pointerInputRouter = _touchInputRouter;
         _mouseInputRouter.enabled = false;
@@ -46,29 +46,29 @@ public class SwipeInput : MonoBehaviour
 
     private void OnEnable()
     {
-        _pointerInputRouter.Pressed += OnPressed;
-        _pointerInputRouter.Moved += OnMoved;
-        _pointerInputRouter.Released += OnReleased;
+        _pointerInput.Pressed += OnPressed;
+        _pointerInput.Moved += OnMoved;
+        _pointerInput.Released += OnReleased;
     }
     
     private void OnDisable()
     {
-        _pointerInputRouter.Pressed += OnPressed;
-        _pointerInputRouter.Moved += OnMoved;
-        _pointerInputRouter.Released += OnReleased;
+        _pointerInput.Pressed += OnPressed;
+        _pointerInput.Moved += OnMoved;
+        _pointerInput.Released += OnReleased;
     }
 
     private void OnPressed()
     {
         _swipedOnce = false;
 
-        Vector2 normalized = ScreenToNormalized(_pointerInputRouter.Position);
+        Vector2 normalized = ScreenToNormalized(_pointerInput.Position);
         _fingerLastPosition = normalized;
     }
     
     private void OnMoved()
     {
-        Vector2 normalized = ScreenToNormalized(_pointerInputRouter.Position);
+        Vector2 normalized = ScreenToNormalized(_pointerInput.Position);
         
         _fingerVelocity = normalized - _fingerLastPosition;
         _delta += _fingerVelocity;
@@ -82,7 +82,7 @@ public class SwipeInput : MonoBehaviour
     {
         _fingerVelocity = Vector2.zero;
         _delta = Vector2.zero;
-        _fingerLastPosition = ScreenToNormalized(_pointerInputRouter.Position);
+        _fingerLastPosition = ScreenToNormalized(_pointerInput.Position);
         _swipedOnce = false;
     }
 
@@ -108,7 +108,7 @@ public class SwipeInput : MonoBehaviour
             _swipedOnce = true;
 
             _fingerVelocity = Vector3.zero;
-            Vector2 normalized = ScreenToNormalized(_pointerInputRouter.Position);
+            Vector2 normalized = ScreenToNormalized(_pointerInput.Position);
             _delta = Vector2.zero;
             _fingerLastPosition = normalized;
             
@@ -132,7 +132,7 @@ public class SwipeInput : MonoBehaviour
             _swipedOnce = true;
 
             _fingerVelocity = Vector3.zero;
-            Vector2 normalized = ScreenToNormalized(_pointerInputRouter.Position);
+            Vector2 normalized = ScreenToNormalized(_pointerInput.Position);
             _delta = Vector2.zero;
             _fingerLastPosition = normalized;
         }

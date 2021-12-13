@@ -50,7 +50,8 @@ MonoBehaviour:
   _moveSpeed: 7
   _minMoveTime: 0.2
   _maxMoveTime: 0.8
-  _grabTime: 0.3
+  _attachTime: 0.3
+  _detachTime: 0.2
   _grabHeight: 1.5
 --- !u!135 &8072999740495886119
 SphereCollider:
@@ -119,76 +120,66 @@ MonoBehaviour:
   m_CollisionMaterial: {fileID: 0}
   m_SurfaceCollisions: 0
   m_SelfCollisions: 0
-  restLength_: 2.7465246
+  restLength_: 2.3531988
   elements:
   - particle1: 0
     particle2: 1
-    restLength: 0.19527386
+    restLength: 0.1950164
     constraintForce: 0
     tearResistance: 1
   - particle1: 1
     particle2: 2
-    restLength: 0.196193
+    restLength: 0.1961505
     constraintForce: 0
     tearResistance: 1
   - particle1: 2
     particle2: 3
-    restLength: 0.19649513
+    restLength: 0.19566934
     constraintForce: 0
     tearResistance: 1
   - particle1: 3
     particle2: 4
-    restLength: 0.19604792
+    restLength: 0.1957212
     constraintForce: 0
     tearResistance: 1
   - particle1: 4
     particle2: 5
-    restLength: 0.19603147
+    restLength: 0.19543149
     constraintForce: 0
     tearResistance: 1
   - particle1: 5
     particle2: 6
-    restLength: 0.19558129
+    restLength: 0.19496426
     constraintForce: 0
     tearResistance: 1
   - particle1: 6
     particle2: 7
-    restLength: 0.19439416
+    restLength: 0.1961842
     constraintForce: 0
     tearResistance: 1
   - particle1: 7
     particle2: 8
-    restLength: 0.19533356
+    restLength: 0.19665058
     constraintForce: 0
     tearResistance: 1
   - particle1: 8
     particle2: 9
-    restLength: 0.1965206
+    restLength: 0.196929
     constraintForce: 0
     tearResistance: 1
   - particle1: 9
     particle2: 10
-    restLength: 0.19694316
+    restLength: 0.19685884
     constraintForce: 0
     tearResistance: 1
   - particle1: 10
     particle2: 11
-    restLength: 0.19697675
+    restLength: 0.19737466
     constraintForce: 0
     tearResistance: 1
   - particle1: 11
     particle2: 12
-    restLength: 0.19740322
-    constraintForce: 0
-    tearResistance: 1
-  - particle1: 12
-    particle2: 13
-    restLength: 0.19708598
-    constraintForce: 0
-    tearResistance: 1
-  - particle1: 13
-    particle2: 14
-    restLength: 0.19624439
+    restLength: 0.19624822
     constraintForce: 0
     tearResistance: 1
   m_RopeBlueprint: {fileID: 11400000, guid: 8a38b30088b4fad419b0a40ba90d0fd1, type: 2}
@@ -404,7 +395,8 @@ MonoBehaviour:
   _moveSpeed: 7
   _minMoveTime: 0.2
   _maxMoveTime: 0.8
-  _grabTime: 0.3
+  _attachTime: 0.3
+  _detachTime: 0.2
   _grabHeight: 1.5
 --- !u!135 &3222506044526820309
 SphereCollider:
@@ -469,6 +461,8 @@ MonoBehaviour:
   _laceColor: {fileID: 11400000, guid: 2824a23093f50c4499635d43963fa01b, type: 2}
   _meshRenderer: {fileID: 7659210017527462102}
   _obiRope: {fileID: 4569122270513551994}
+  _firstHandle: {fileID: 2452447930253293953}
+  _secondHandle: {fileID: 3539501816516666339}
 --- !u!114 &1736394648175933415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,10 +477,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obiRopeCursor: {fileID: 2694962259095368331}
   _obiRope: {fileID: 4569122270513551994}
-  _tensionLongingChange: 600
-  _tensionShorteningChange: 1000
-  _tensionLongingTreshold: 0.03
-  _tensionRestingTreshold: 0.01
+  _tensionLongingChange: 500
+  _tensionShorteningChange: 500
+  _tensionLongingTreshold: 0.05
+  _tensionRestingTreshold: 0.02
+  _minDelta: -1
 --- !u!1 &8745883382389993985
 GameObject:
   m_ObjectHideFlags: 0

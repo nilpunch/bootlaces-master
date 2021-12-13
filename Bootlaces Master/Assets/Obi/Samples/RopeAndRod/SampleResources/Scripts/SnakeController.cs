@@ -71,7 +71,7 @@ public class SnakeController : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKey(KeyCode.J))
+        if (UnityEngine.Input.GetKey(KeyCode.J))
         {
             for (int i = 1; i < rope.activeParticleCount; ++i)
             {
@@ -93,19 +93,19 @@ public class SnakeController : MonoBehaviour
             Vector3 direction = Vector3.zero;
 
             // Determine movement direction:
-            if (Input.GetKey(KeyCode.W))
+            if (UnityEngine.Input.GetKey(KeyCode.W))
             {
                 direction += headReferenceFrame.forward * headSpeed;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (UnityEngine.Input.GetKey(KeyCode.A))
             {
                 direction += -headReferenceFrame.right * headSpeed;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (UnityEngine.Input.GetKey(KeyCode.S))
             {
                 direction += -headReferenceFrame.forward * headSpeed;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (UnityEngine.Input.GetKey(KeyCode.D))
             {
                 direction += headReferenceFrame.right * headSpeed;
             }
@@ -116,7 +116,7 @@ public class SnakeController : MonoBehaviour
             solver.velocities[headIndex] += (Vector4)direction * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (UnityEngine.Input.GetKey(KeyCode.Space))
             solver.velocities[headIndex] += (Vector4)Vector3.up * Time.deltaTime * upSpeed;
     }
 }

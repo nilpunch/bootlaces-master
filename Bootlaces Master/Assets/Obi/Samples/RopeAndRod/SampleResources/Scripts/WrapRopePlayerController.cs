@@ -19,19 +19,19 @@ public class WrapRopePlayerController : MonoBehaviour
         Vector3 direction = Vector3.zero;
 
         // Determine movement direction:
-        if (Input.GetKey(KeyCode.W))
+        if (UnityEngine.Input.GetKey(KeyCode.W))
         {
             direction += Vector3.up * acceleration;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (UnityEngine.Input.GetKey(KeyCode.A))
         {
             direction += Vector3.left * acceleration;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (UnityEngine.Input.GetKey(KeyCode.S))
         {
             direction += Vector3.down * acceleration;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (UnityEngine.Input.GetKey(KeyCode.D))
         {
             direction += Vector3.right * acceleration;
         }

@@ -11,10 +11,16 @@ namespace BootlacesMaster
         [SerializeField] private LaceColor _laceColor = null;
         [SerializeField] private MeshRenderer _meshRenderer = null;
         [SerializeField] private ObiRope _obiRope = null;
+        [SerializeField] private LaceHandle _firstHandle = null;
+        [SerializeField] private LaceHandle _secondHandle = null;
 
         public override IEnumerable<Vector3> Points => GetParticlePositions();
         
         public override Color Color => _laceColor.Color;
+        
+        public override int FirstHole => _firstHandle.AttachedHoleIndex;
+        
+        public override int SecondHole => _secondHandle.AttachedHoleIndex;
 
         private void Awake()
         {

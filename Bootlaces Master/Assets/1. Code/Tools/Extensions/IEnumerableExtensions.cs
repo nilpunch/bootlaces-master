@@ -1,8 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public static class IEnumerableExtensions
 {
+    private class DefaultEqualityComparer<T> : IEqualityComparer<T>
+    {
+        public static readonly DefaultEqualityComparer<T> Instance = new DefaultEqualityComparer<T>();
+
+        private DefaultEqualityComparer()
+        {
+            
+        }
+        
+        public bool Equals(T x, T y)
+        {
+            return x.Equals(y);
+        }
+
+        public int GetHashCode(T obj)
+        {
+            return obj.GetHashCode();
+        }
+    }
+    
     ///<summary>Wraps this object instance into an IEnumerable&lt;T&gt; consisting of a single item.</summary>
     ///<typeparam name="T">Type of the object.</typeparam>
     ///<param name="item">The instance that will be wrapped. </param>
@@ -56,6 +77,27 @@ public static class IEnumerableExtensions
         foreach (var item in source)
             action.Invoke(item);
     }
+    
+
+    public static bool PermutationEquals<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second)
+    {
+        return first.OrderBy(element => element.GetHashCode()).SequenceEqual(second.OrderBy(element => element.GetHashCode()));
+        
+        //
+        // var deletedItems = first.Except(second).Any();
+        // var newItems = second.Except(first).Any();
+        // return !newItems && !deletedItems;
+        
+        // if (first.Any() == false && second.Any() == false)
+        //     return true;
+        //
+        // if (first.Except(second).Any())
+        //     return false;
+        // if (second.Except(first).Any())
+        //     return false;
+        return true;
+    }
+
     
     public static IEnumerable<TResult> Pairwise<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TSource, TResult> resultSelector)
     {

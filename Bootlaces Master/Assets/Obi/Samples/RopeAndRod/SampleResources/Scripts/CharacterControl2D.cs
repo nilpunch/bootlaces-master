@@ -17,11 +17,11 @@ public class CharacterControl2D : MonoBehaviour {
 	
 	void FixedUpdate () {
 
-		unityRigidbody.AddForce(new Vector3(Input.GetAxis("Horizontal")*acceleration,0,0));
+		unityRigidbody.AddForce(new Vector3(UnityEngine.Input.GetAxis("Horizontal")*acceleration,0,0));
 	
 		unityRigidbody.velocity = Vector3.ClampMagnitude(unityRigidbody.velocity,maxSpeed);
 		
-		if (Input.GetButtonDown("Jump")){
+		if (UnityEngine.Input.GetButtonDown("Jump")){
 			unityRigidbody.AddForce(Vector3.up * jumpPower,ForceMode.VelocityChange);
 		}
 	}

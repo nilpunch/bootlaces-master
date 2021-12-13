@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class TouchInputRouter : MonoBehaviour, IPointerInputRouter
+public class TouchPointerInput : MonoBehaviour, IPointerInput
 {
     public Vector2 Position { get; private set; }
     
@@ -15,10 +15,10 @@ public class TouchInputRouter : MonoBehaviour, IPointerInputRouter
 
     private void Update()
     {
-        if (Input.touchCount == 0)
+        if (UnityEngine.Input.touchCount == 0)
             return;
 
-        Touch touch = Input.GetTouch(0);
+        Touch touch = UnityEngine.Input.GetTouch(0);
 
         Delta = touch.position - Position;
         Position = touch.position;
