@@ -8,7 +8,7 @@ namespace BootlacesMaster
     {
         [SerializeField] private Transform _upAndDownTransform = null;
         [SerializeField] private Transform _moveAroundTransform = null;
-        
+
         [Space, SerializeField] private float _moveSpeed = 0.1f;
         [SerializeField] private float _minMoveTime = 0.05f;
         [SerializeField] private float _minAttachMoveTime = 0.05f;
@@ -19,12 +19,20 @@ namespace BootlacesMaster
 
         [Space, SerializeField, Range(0f, 1f)] private float _sequenceShift = 0f;
 
+        private Tween _attachMovement;
+        private Tween _detachMovement;
+        private Tween _wanderingMovement;
+        
         private Vector3 _lastRequestedMove;
-        private bool _canMove = true;
         private int _lastAttachedHole = -1;
-        
+
+        private bool CanMove => Detached && (_detachMovement == null 
+                                             || _detachMovement.IsActive() == false 
+                                             || _detachMovement.IsPlaying() == false 
+                                             || _upAndDownTransform.localPosition.y / _grabHeight > _sequenceShift);
+
         public Vector3 Position => _upAndDownTransform.position;
-        
+
         public bool Attached { get; private set; }
 
         public bool Detached => Attached == false;
@@ -38,72 +46,92 @@ namespace BootlacesMaster
 
             _lastRequestedMove = position;
 
-            if (_canMove == false)
+            if (CanMove == false)
                 return;
-            
+
             float moveTime = Vector3.Distance(_moveAroundTransform.position, position) / _moveSpeed;
 
-            _moveAroundTransform.DOKill();
-            _moveAroundTransform.DOMove(position, Mathf.Clamp(moveTime, _minMoveTime, _maxMoveTime));
+            _attachMovement?.Kill();
+            _wanderingMovement?.Kill();
+
+            _wanderingMovement = _moveAroundTransform.DOMove(position, Mathf.Clamp(moveTime, _minMoveTime, _maxMoveTime))
+                .SetEase(Ease.OutQuad)
+                .SetUpdate(UpdateType.Fixed);
         }
 
         public void Detach()
         {
             if (Detached)
                 throw new InvalidOperationException("You can't detach lace that not attached.");
-            
+
             Attached = false;
 
-            _upAndDownTransform.DOKill();
-            _moveAroundTransform.DOKill();
+            _attachMovement?.Kill();
+            _detachMovement?.Kill();
+            _wanderingMovement?.Kill();
 
-            DOTween.Sequence()
-                .AppendInterval(_detachTime * _sequenceShift)
-                .AppendCallback(() =>
+            _detachMovement = _upAndDownTransform.DOLocalMoveY(_grabHeight, _detachTime)
+                .SetEase(Ease.InOutQuad)
+                .SetUpdate(UpdateType.Fixed)
+                .OnUpdate(() =>
                 {
-                    _canMove = true;
-                    MoveTo(_lastRequestedMove);
-                })
-                .SetTarget(_moveAroundTransform);
-
-            _upAndDownTransform.DOLocalMoveY(_grabHeight, _detachTime)
-                .SetEase(Ease.InOutQuad);
+                    if (CanMove && (_wanderingMovement == null || _wanderingMovement.IsActive() == false || _wanderingMovement.IsPlaying() == false))
+                        MoveTo(_lastRequestedMove);
+                });
         }
-        
+
         public void Attach(Hole hole)
         {
             if (Attached)
                 throw new InvalidOperationException("You can't attach lace that already attached.");
 
-            Attached = true;
-            _canMove = false;
+            bool canFastAttachToSameHole = _lastAttachedHole == hole.Index && CanMove == false;
 
-            if (_lastAttachedHole == hole.Index)
-                _upAndDownTransform.DOKill();
-            
+            float additionalTime = _detachMovement.IsActive()
+                ? Mathf.Max(0f, _detachMovement.Duration() * _sequenceShift - _detachMovement.Elapsed())
+                : 0f;
+
+            Attached = true;
+
             _lastAttachedHole = hole.Index;
             _lastRequestedMove = hole.Position;
 
             float moveTime = Vector3.Distance(_moveAroundTransform.position, hole.Position) / _moveSpeed;
 
-            _moveAroundTransform.DOKill();
-            transform.DOKill();
-            
-            DOTween.Sequence()
-                .Append(_moveAroundTransform.DOMove(hole.Position, Mathf.Clamp(moveTime, _minAttachMoveTime, _maxMoveTime)))
-                .AppendCallback(() => _upAndDownTransform.DOKill())
-                .Append(_upAndDownTransform.DOLocalMoveY(0f, _attachTime)
-                    .SetEase(Ease.InOutQuad))
-                .SetTarget(transform);
+            _wanderingMovement?.Kill();
+            _attachMovement?.Kill();
+
+            if (canFastAttachToSameHole)
+            {
+                _detachMovement?.Kill();
+                _attachMovement = _upAndDownTransform
+                    .DOLocalMoveY(0f, _attachTime)
+                    .SetEase(Ease.InOutQuad)
+                    .SetUpdate(UpdateType.Fixed);
+            }
+            else
+            {
+                _attachMovement = DOTween.Sequence()
+                    .AppendInterval(additionalTime)
+                    .Append(_wanderingMovement = _moveAroundTransform
+                        .DOMove(hole.Position, Mathf.Clamp(moveTime, _minAttachMoveTime, _maxMoveTime))
+                        .SetEase(Ease.OutQuad)
+                        .SetUpdate(UpdateType.Fixed))
+                    .AppendCallback(() => _detachMovement.Kill())
+                    .Append(_upAndDownTransform
+                        .DOLocalMoveY(0f, _attachTime)
+                        .SetEase(Ease.InOutQuad)
+                        .SetUpdate(UpdateType.Fixed))
+                    .SetUpdate(UpdateType.Fixed);
+            }
         }
-        
+
         public void AttachNoAnimation(Hole hole)
         {
             if (Attached)
                 throw new InvalidOperationException("You can't attach lace that already attached.");
 
             Attached = true;
-            _canMove = false;
 
             _lastAttachedHole = hole.Index;
             _lastRequestedMove = hole.Position;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace BootlacesMaster
 {
-    public class Grabber : MonoBehaviour
+    public class Grabber : PointerInputHandler
     {
         [SerializeField] private CrossPlatformPointerInput _input = null;
         [SerializeField] private Camera _camera = null;
         [SerializeField] private LayerMask _inputLayer = new LayerMask();
-        [SerializeField] private float _grabRange = 3f;
+        [SerializeField] private float _grabRange = 1.5f;
         
         private LaceHandle _grabbedHandle = null;
         private Hole _lastDetachedHole = null;
@@ -20,24 +20,10 @@ namespace BootlacesMaster
             _holes = FindObjectsOfType<Hole>();
         }
 
-        private void OnEnable()
-        {
-            _input.Pressed += OnPressed;
-            _input.Moved += OnMoved;
-            _input.Released += OnReleased;
-        }
-        
-        private void OnDisable()
-        {
-            _input.Pressed -= OnPressed;
-            _input.Moved -= OnMoved;
-            _input.Released -= OnReleased;
-        }
-
-        private void OnPressed()
+        public override bool OnPressed(Vector2 screenPosition)
         {
             if (CalculateWorldPosition(_input.Position, out var worldPosition) == false)
-                return;
+                return false;
 
             Hole nearbyHole = _holes.Where(hole => hole.HasHandle)
                 .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
@@ -48,10 +34,13 @@ namespace BootlacesMaster
                 _lastDetachedHole = nearbyHole;
                 _grabbedHandle = nearbyHole.Detach();
                 _grabbedHandle.MoveTo(worldPosition);
+                return true;
             }
+
+            return false;
         }
 
-        private void OnMoved()
+        public override void OnMoved(Vector2 screenPosition)
         {
             if (_grabbedHandle == null)
                 return;
@@ -60,7 +49,7 @@ namespace BootlacesMaster
                 _grabbedHandle.MoveTo(worldPosition);
         }
 
-        private void OnReleased()
+        public override void OnReleased(Vector2 screenPosition)
         {
             if (_grabbedHandle == null)
                 return;

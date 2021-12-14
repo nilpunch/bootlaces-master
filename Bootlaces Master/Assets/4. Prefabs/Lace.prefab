@@ -47,14 +47,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upAndDownTransform: {fileID: 8745883382389993988}
   _moveAroundTransform: {fileID: 3077754689127386634}
-  _moveSpeed: 6
+  _moveSpeed: 5.5
   _minMoveTime: 0.2
-  _minAttachMoveTime: 0.2
+  _minAttachMoveTime: 0.05
   _maxMoveTime: 10
   _attachTime: 0.3
-  _detachTime: 0.25
+  _detachTime: 0.3
   _grabHeight: 1.5
-  _sequenceShift: 0.5
+  _sequenceShift: 0.6
 --- !u!135 &8072999740495886119
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -394,14 +394,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upAndDownTransform: {fileID: 8745883383217847539}
   _moveAroundTransform: {fileID: 200901789524256386}
-  _moveSpeed: 6
+  _moveSpeed: 5.5
   _minMoveTime: 0.2
-  _minAttachMoveTime: 0.2
+  _minAttachMoveTime: 0.05
   _maxMoveTime: 10
   _attachTime: 0.3
-  _detachTime: 0.25
+  _detachTime: 0.3
   _grabHeight: 1.5
-  _sequenceShift: 0.5
+  _sequenceShift: 0.6
 --- !u!135 &3222506044526820309
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -500,8 +500,8 @@ MonoBehaviour:
   _obiRope: {fileID: 4569122270513551994}
   _tensionLongingChange: 500
   _tensionShorteningChange: 500
-  _tensionLongingTreshold: 0.05
-  _tensionRestingTreshold: 0.02
+  _tensionLongingTreshold: 0.03
+  _tensionRestingTreshold: 0.01
   _minDelta: -1
   _maxDelta: 1
 --- !u!1 &8745883382389993985
