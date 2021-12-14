@@ -61,7 +61,7 @@ namespace BootlacesMaster
             {
                 int solverIndex = _actor.solverIndices[i];
                 _actor.solver.positions[solverIndex] = _ropeSnapshot.ParticlePositions[i];
-                _actor.solver.velocities[solverIndex] = _ropeSnapshot.ParticleVelocities[i];
+                _actor.solver.velocities[solverIndex] = Vector3.zero;  //_ropeSnapshot.ParticleVelocities[i];
             }
 
             for (int i = 0; i < 3; ++i)

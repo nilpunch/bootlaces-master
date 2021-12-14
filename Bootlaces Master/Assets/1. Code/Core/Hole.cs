@@ -5,13 +5,14 @@ namespace BootlacesMaster
 {
     public class Hole : MonoBehaviour
     {
+        [SerializeField] private Transform _position = null;
         [SerializeField] private int _index = 1;
         
         private LaceHandle _attachedHandle;
         
         public bool HasHandle => _attachedHandle != null;
 
-        public Vector3 Position => transform.position;
+        public Vector3 Position => _position.position;
 
         public int Index => _index;
 

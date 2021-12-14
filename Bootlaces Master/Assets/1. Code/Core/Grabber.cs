@@ -15,6 +15,8 @@ namespace BootlacesMaster
         private Hole _lastDetachedHole = null;
         private Hole[] _holes;
 
+        public bool Grabbing => _grabbedHandle != null;
+        
         private void Awake()
         {
             _holes = FindObjectsOfType<Hole>();
@@ -42,7 +44,7 @@ namespace BootlacesMaster
 
         public override void OnMoved(Vector2 screenPosition)
         {
-            if (_grabbedHandle == null)
+            if (Grabbing == false)
                 return;
 
             if (CalculateWorldPosition(_input.Position, out var worldPosition))
@@ -51,7 +53,7 @@ namespace BootlacesMaster
 
         public override void OnReleased(Vector2 screenPosition)
         {
-            if (_grabbedHandle == null)
+            if (Grabbing == false)
                 return;
 
             LaceHandle handle = _grabbedHandle;
