@@ -49,7 +49,7 @@ MonoBehaviour:
   _moveAroundTransform: {fileID: 3077754689127386634}
   _moveSpeed: 5.5
   _minMoveTime: 0.2
-  _minAttachMoveTime: 0.05
+  _minAttachMoveTime: 0.1
   _maxMoveTime: 10
   _attachTime: 0.3
   _detachTime: 0.3
@@ -396,7 +396,7 @@ MonoBehaviour:
   _moveAroundTransform: {fileID: 200901789524256386}
   _moveSpeed: 5.5
   _minMoveTime: 0.2
-  _minAttachMoveTime: 0.05
+  _minAttachMoveTime: 0.1
   _maxMoveTime: 10
   _attachTime: 0.3
   _detachTime: 0.3

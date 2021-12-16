@@ -346,7 +346,7 @@ MonoBehaviour:
   render: 1
   shader: {fileID: 4800000, guid: 801733041f66b49e1b3c2101471db877, type: 3}
   particleColor: {r: 1, g: 1, b: 1, a: 1}
-  radiusScale: 0.5
+  radiusScale: 0.2
 --- !u!1 &7006675449673215503
 GameObject:
   m_ObjectHideFlags: 0

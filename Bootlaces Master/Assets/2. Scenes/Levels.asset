@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f4ebe122bad6b4598b7a9ff991d823, type: 3}
+  m_Name: Levels
+  m_EditorClassIdentifier: 
+  _scenesForPreload:
+  - _sceneAsset: {fileID: 102900000, guid: 927b18ba3eab637439776bf02797a6ed, type: 3}
+    _scenePath: Assets/2. Scenes/Loading Screen.unity
+  _levels:
+  - _sceneAsset: {fileID: 102900000, guid: 39c015f931960624fae274a5ad016945, type: 3}
+    _scenePath: Assets/2. Scenes/Level 1.unity
+  - _sceneAsset: {fileID: 102900000, guid: 66bdf10920466cc4c817ce692f281b24, type: 3}
+    _scenePath: Assets/2. Scenes/Level 2.unity

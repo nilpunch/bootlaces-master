@@ -41,30 +41,30 @@ namespace BootlacesMaster
                     Gizmos.DrawLine(segment.Begin, segment.End);
             }
             
-            // Showing intersections
-            foreach (var (firstLace, secondLace) in _laces.DistinctPairs((first, second) => (first, second)))
-            {
-                if (firstLace.Intersects(secondLace, out var intersections) == false)
-                    continue;
-                
-                foreach (var intersection in intersections)
-                {
-                    if (intersection.FirstLacePoint.y > intersection.SecondLacePoint.y)
-                    {
-                        Gizmos.color = _intersectionUpperPointColor;
-                        Gizmos.DrawSphere(intersection.FirstLacePoint, _intersectionPointRadius);
-                        Gizmos.color = _intersectionLowerPointColor;
-                        Gizmos.DrawSphere(intersection.SecondLacePoint, _intersectionPointRadius);
-                    }
-                    else
-                    {
-                        Gizmos.color = _intersectionUpperPointColor;
-                        Gizmos.DrawSphere(intersection.SecondLacePoint, _intersectionPointRadius);
-                        Gizmos.color = _intersectionLowerPointColor;
-                        Gizmos.DrawSphere(intersection.FirstLacePoint, _intersectionPointRadius);
-                    }
-                }
-            }
+            // // Showing intersections
+            // foreach (var (firstLace, secondLace) in _laces.DistinctPairs((first, second) => (first, second)))
+            // {
+            //     if (firstLace.Intersects(secondLace, out var intersections) == false)
+            //         continue;
+            //     
+            //     foreach (var intersection in intersections)
+            //     {
+            //         if (intersection.FirstLacePoint.y > intersection.SecondLacePoint.y)
+            //         {
+            //             Gizmos.color = _intersectionUpperPointColor;
+            //             Gizmos.DrawSphere(intersection.FirstLacePoint, _intersectionPointRadius);
+            //             Gizmos.color = _intersectionLowerPointColor;
+            //             Gizmos.DrawSphere(intersection.SecondLacePoint, _intersectionPointRadius);
+            //         }
+            //         else
+            //         {
+            //             Gizmos.color = _intersectionUpperPointColor;
+            //             Gizmos.DrawSphere(intersection.SecondLacePoint, _intersectionPointRadius);
+            //             Gizmos.color = _intersectionLowerPointColor;
+            //             Gizmos.DrawSphere(intersection.FirstLacePoint, _intersectionPointRadius);
+            //         }
+            //     }
+            // }
         }
     }
 }

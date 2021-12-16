@@ -14,26 +14,22 @@ namespace BootlacesMaster
         private RopeSnapshot _ropeSnapshot;
         private Holes _holes;
 
-        private void Awake()
-        {
-            _actor.OnBlueprintLoaded += OnRopeBlueprintLoaded;
-        }
-
         private void OnDestroy()
         {
-            _actor.OnBlueprintLoaded -= OnRopeBlueprintLoaded;
+            _cursor.OnRopeUpdated -= OnRopeUpdated;
         }
 
         public void Init(ObiSolver solver, Holes holes, RopeSnapshot ropeSnapshot)
         {
             _holes = holes;
             _ropeSnapshot = ropeSnapshot;
-            _cursor.UpdateSource();
+            
+            _cursor.OnRopeUpdated += OnRopeUpdated;
             
             transform.SetParent(solver.transform, true);
         }
 
-        private void OnRopeBlueprintLoaded(ObiActor actor, ObiActorBlueprint blueprint)
+        private void OnRopeUpdated()
         {
             if (_ropeSnapshot == null)
             {
@@ -41,13 +37,13 @@ namespace BootlacesMaster
                 return;
             }
             
-            StartCoroutine(OneFrameDelay());
+            _cursor.OnRopeUpdated -= OnRopeUpdated;
+            
+            StartCoroutine(InittingRope());
         }
 
-        private IEnumerator OneFrameDelay()
+        private IEnumerator InittingRope()
         {
-            yield return null;
-            
             foreach (var lengthChange in _ropeSnapshot.LengthChanges)
             {
                 _cursor.ChangeLength(lengthChange);
@@ -64,7 +60,7 @@ namespace BootlacesMaster
                 _actor.solver.velocities[solverIndex] = Vector3.zero;  //_ropeSnapshot.ParticleVelocities[i];
             }
 
-            for (int i = 0; i < 3; ++i)
+            for (int i = 0; i < 5; ++i)
                 yield return null;
 
             _tensionLimiter.Enable();

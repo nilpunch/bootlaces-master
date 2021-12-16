@@ -14,7 +14,11 @@ namespace BootlacesMaster
         private LaceHandle _grabbedHandle = null;
         private Hole _lastDetachedHole = null;
         private Hole[] _holes;
+        private bool _inputDisabled = false;
 
+        public event Action Grabbed;
+        public event Action UnGrabbed;
+        
         public bool Grabbing => _grabbedHandle != null;
         
         private void Awake()
@@ -24,10 +28,13 @@ namespace BootlacesMaster
 
         public override bool OnPressed(Vector2 screenPosition)
         {
+            if (_inputDisabled)
+                return false;
+            
             if (CalculateWorldPosition(_input.Position, out var worldPosition) == false)
                 return false;
 
-            Hole nearbyHole = _holes.Where(hole => hole.HasHandle)
+            Hole nearbyHole = _holes.Where(hole => hole.IsLocked)
                 .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
                 .FirstOrDefault();
 
@@ -36,6 +43,7 @@ namespace BootlacesMaster
                 _lastDetachedHole = nearbyHole;
                 _grabbedHandle = nearbyHole.Detach();
                 _grabbedHandle.MoveTo(worldPosition);
+                Grabbed?.Invoke();
                 return true;
             }
 
@@ -58,6 +66,8 @@ namespace BootlacesMaster
 
             LaceHandle handle = _grabbedHandle;
             _grabbedHandle = null;
+            
+            UnGrabbed?.Invoke();
 
             if (CalculateWorldPosition(_input.Position, out var worldPosition) == false)
             {
@@ -65,7 +75,7 @@ namespace BootlacesMaster
                 return;
             }
 
-            Hole nearbyHole = _holes.Where(hole => hole.HasHandle == false)
+            Hole nearbyHole = _holes.Where(hole => hole.IsLocked == false)
                 .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
                 .FirstOrDefault();
 
@@ -90,6 +100,16 @@ namespace BootlacesMaster
             
             worldPosition = Vector3.zero;
             return false;
+        }
+
+        public void DisableInput()
+        {
+            _inputDisabled = true;
+        }
+        
+        public void EnableInput()
+        {
+            _inputDisabled = false;
         }
     }
 }

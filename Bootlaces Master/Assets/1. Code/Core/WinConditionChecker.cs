@@ -35,8 +35,8 @@ namespace BootlacesMaster
             if (currentCondition.Equals(_winConditionPreset.Conditions))
             {
                 _checkingWin = false;
+                _grabber.DisableInput();
                 Winned?.Invoke();
-                Debug.Log("Winned!");
             }
         }
 

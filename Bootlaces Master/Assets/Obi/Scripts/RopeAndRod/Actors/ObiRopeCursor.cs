@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -16,6 +17,8 @@ namespace Obi
         [Range(0, 1)]
         [HideInInspector] [SerializeField] private float m_SourceMu;
 
+        public event Action OnRopeUpdated;
+        
         public bool direction = true;
 
         ObiStructuralElement m_CursorElement = null;
@@ -74,6 +77,7 @@ namespace Obi
         {
             UpdateCursor();
             UpdateSource();
+            OnRopeUpdated?.Invoke();
         }
 
         private void OnDestroy()

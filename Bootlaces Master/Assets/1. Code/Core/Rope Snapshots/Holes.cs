@@ -8,6 +8,8 @@ namespace BootlacesMaster
     {
         private List<Hole> _holes;
 
+        public IEnumerable<Hole> Collection => _holes;
+        
         private void Awake()
         {
             _holes = GetComponentsInChildren<Hole>().ToList();

@@ -28,11 +28,9 @@ namespace BootlacesMaster
                 _ropeLaces.Add(rope.GetComponent<RopeLace>());
             }
             
-            // needs for ininitting ropes
-            yield return null;
-            yield return null;
-            
             RopesLoaded?.Invoke();
+            
+            yield break;
         }
     }
 }
