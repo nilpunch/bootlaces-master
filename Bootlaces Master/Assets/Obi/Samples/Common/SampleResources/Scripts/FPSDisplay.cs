@@ -60,7 +60,8 @@ public class FPSDisplay : MonoBehaviour
 
                 // display two fractional digits (f2 format)
                 float fps = showMedian ? median : currentFPS;
-                uguiText.text = System.String.Format("{0:F2} FPS ({1:F1} ms)", fps, 1000.0f / fps); 
+                //uguiText.text = System.String.Format("{0:F2} FPS ({1:F1} ms)", fps, 1000.0f / fps); 
+                uguiText.text = System.String.Format("{0:F2} FPS", fps); 
 
                 timeleft = updateInterval;
                 accum = 0.0F;

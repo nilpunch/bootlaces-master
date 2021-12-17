@@ -34,6 +34,8 @@ public class LevelLoader : MonoBehaviour
             Instance = this;
         else
             Destroy(this);
+
+        transform.parent = null;
         
         DontDestroyOnLoad(gameObject);
     }
@@ -84,7 +86,7 @@ public class LevelLoader : MonoBehaviour
         }
         else
         {
-            int savedLevel = PlayerPrefs.GetInt(LevelIndexPref, 0);
+            int savedLevel = 0; //PlayerPrefs.GetInt(LevelIndexPref, 0);
             
             Load(_levelsContainer.GetLevel(savedLevel));
         }

@@ -16,6 +16,9 @@ namespace BootlacesMaster
         private Vector2 _lastPosition;
         private Vector2 _speed;
 
+        public event Action StartRotating;
+        public event Action StopRotating;
+
         private void Update()
         {
             float rotation = _speed.x * Time.deltaTime;

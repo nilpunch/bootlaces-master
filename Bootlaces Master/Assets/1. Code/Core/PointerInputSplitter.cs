@@ -17,6 +17,8 @@ namespace BootlacesMaster
 
         private void OnDisable()
         {
+            OnReleased();
+            
             _input.Pressed -= OnPressed;
             _input.Moved -= OnMoved;
             _input.Released -= OnReleased;

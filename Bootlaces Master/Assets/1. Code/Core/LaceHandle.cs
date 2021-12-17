@@ -126,7 +126,7 @@ namespace BootlacesMaster
             }
         }
 
-        public void AttachNoAnimation(Hole hole)
+        public void AttachInstantly(Hole hole)
         {
             if (Attached)
                 throw new InvalidOperationException("You can't attach lace that already attached.");

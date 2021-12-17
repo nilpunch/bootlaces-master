@@ -17,8 +17,9 @@ namespace BootlacesMaster
         private bool _inputDisabled = false;
 
         public event Action Grabbed;
+        public event Action<Hole> Aimed;
         public event Action UnGrabbed;
-        
+
         public bool Grabbing => _grabbedHandle != null;
         
         private void Awake()
@@ -34,7 +35,7 @@ namespace BootlacesMaster
             if (CalculateWorldPosition(_input.Position, out var worldPosition) == false)
                 return false;
 
-            Hole nearbyHole = _holes.Where(hole => hole.IsLocked)
+            Hole nearbyHole = _holes.Where(hole => hole.HasHandle)
                 .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
                 .FirstOrDefault();
 
@@ -44,6 +45,7 @@ namespace BootlacesMaster
                 _grabbedHandle = nearbyHole.Detach();
                 _grabbedHandle.MoveTo(worldPosition);
                 Grabbed?.Invoke();
+                Aimed?.Invoke(_lastDetachedHole);
                 return true;
             }
 
@@ -55,8 +57,24 @@ namespace BootlacesMaster
             if (Grabbing == false)
                 return;
 
-            if (CalculateWorldPosition(_input.Position, out var worldPosition))
-                _grabbedHandle.MoveTo(worldPosition);
+            if (CalculateWorldPosition(_input.Position, out var worldPosition) == false)
+            {
+                return;
+            }
+            
+            _grabbedHandle.MoveTo(worldPosition);
+                
+            Hole nearbyHole = _holes.Where(hole => hole.IsLocked == false)
+                .OrderBy(hole => Vector3.Distance(hole.Position, worldPosition))
+                .FirstOrDefault();
+
+            if (nearbyHole != null)
+            {
+                Aimed?.Invoke(nearbyHole);
+                return;
+            }
+
+            Aimed?.Invoke(_lastDetachedHole);
         }
 
         public override void OnReleased(Vector2 screenPosition)

@@ -15,11 +15,15 @@ namespace BootlacesMaster
         public event Action Locked;
         public event Action Unlocked;
         
-        public bool IsLocked => _attachedHandle != null || _manuallyLocked;
+        public bool HasHandle => _attachedHandle != null;
+
+        public bool IsLocked => HasHandle || HasManualLock;
         
         public bool HasManualLock => _manuallyLocked;
 
         public Vector3 Position => _position.position;
+        
+        public Quaternion Rotation => _position.rotation;
 
         public int Index => _index;
 
@@ -38,7 +42,7 @@ namespace BootlacesMaster
                 throw new InvalidOperationException("Hole cant attach already grabbed handle.");
 
             _attachedHandle = laceHandle;
-            laceHandle.AttachNoAnimation(this);
+            laceHandle.AttachInstantly(this);
         }
         
         public void Attach(LaceHandle laceHandle)
@@ -55,7 +59,7 @@ namespace BootlacesMaster
 
         public LaceHandle Detach()
         {
-            if (IsLocked == false)
+            if (HasHandle == false)
                 throw new InvalidOperationException("No handles attached to this hole.");
 
             LaceHandle handle = _attachedHandle;
