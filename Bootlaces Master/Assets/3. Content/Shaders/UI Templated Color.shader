@@ -3,7 +3,8 @@
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-        _Color ("Tint", Color) = (1,1,1,1)
+        [PerRendererData] _Color ("Tint", Color) = (1,1,1,1)
+        _SecondaryColor ("Secondary Tint", Color) = (1,1,1,1)
 
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -76,6 +77,7 @@
 
             sampler2D _MainTex;
             fixed4 _Color;
+            fixed4 _SecondaryColor;
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
             float4 _MainTex_ST;
@@ -96,15 +98,19 @@
 
             fixed4 frag(v2f IN) : SV_Target
             {
-                half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
+                half4 textureColor = tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd;
 
-                #ifdef UNITY_UI_CLIP_RECT
-                color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
-
-                #ifdef UNITY_UI_ALPHACLIP
-                clip (color.a - 0.001);
-                #endif
+                float colorMagnitude = (textureColor.r + textureColor.g + textureColor.b) / 3;
+                
+                half4 color = lerp(IN.color, _SecondaryColor, colorMagnitude);
+                
+                // #ifdef UNITY_UI_CLIP_RECT
+                // color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
+                // #endif
+                //
+                // #ifdef UNITY_UI_ALPHACLIP
+                // clip (color.a - 0.001);
+                // #endif
 
                 return color;
             }
