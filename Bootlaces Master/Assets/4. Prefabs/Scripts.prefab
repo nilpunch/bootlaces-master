@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationPivot: {fileID: 0}
   _rotationAxis: {x: 0, y: 1, z: 0}
-  _sensitivity: 60
+  _sensitivity: 50
   _deceleration: 5
   _pressedDeceleration: 15
   _maxSpeed: 1000
