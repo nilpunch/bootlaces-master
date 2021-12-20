@@ -794,12 +794,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19803840, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: simulationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19803840, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19803840, guid: 087da436576d35542825d392925d79c4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.6
+      value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 19805732, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: simulationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19805732, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19805732, guid: 087da436576d35542825d392925d79c4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
       value: 0.34901962
+      objectReference: {fileID: 0}
+    - target: {fileID: 19805732, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19805732, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: startDelay.maxCurve.m_Curve.Array.data[1].value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19888488, guid: 087da436576d35542825d392925d79c4, type: 3}
       propertyPath: scalingMode
@@ -822,9 +846,25 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 19935498, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19935498, guid: 087da436576d35542825d392925d79c4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e772c82b2b4ba384483c102774acc4b0, type: 2}
+    - target: {fileID: 19935498, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19935498, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19935498, guid: 087da436576d35542825d392925d79c4, type: 3}
+      propertyPath: m_VertexStreams.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 19984568, guid: 087da436576d35542825d392925d79c4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
