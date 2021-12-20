@@ -4,8 +4,8 @@ Properties {
     [Gamma] _Exposure ("Exposure", Range(0, 8)) = 1.0
     _Rotation ("Rotation", Range(0, 360)) = 0
     [Header(Extended)]
-    _Height ("Height", float) = 0
-    _HeightScale ("Height Scale", float) = 0
+    _Height ("Height Offset", float) = 0
+    _HeightScale ("Height Scale", float) = 1
     [NoScaleOffset] _FrontTex ("Front [+Z]   (HDR)", 2D) = "grey" {}
     [NoScaleOffset] _BackTex ("Back [-Z]   (HDR)", 2D) = "grey" {}
     [NoScaleOffset] _LeftTex ("Left [+X]   (HDR)", 2D) = "grey" {}
