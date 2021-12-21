@@ -16,7 +16,17 @@ MonoBehaviour:
   - _sceneAsset: {fileID: 102900000, guid: 927b18ba3eab637439776bf02797a6ed, type: 3}
     _scenePath: Assets/2. Scenes/Loading Screen.unity
   _levels:
+  - _sceneAsset: {fileID: 102900000, guid: 7a5f41597487b56438e62647853976bb, type: 3}
+    _scenePath: Assets/2. Scenes/Levels/Level 5 Laces.unity
+  - _sceneAsset: {fileID: 102900000, guid: 91f9342aadd5ab9448b02e27ac9e18b8, type: 3}
+    _scenePath: Assets/2. Scenes/Levels/Level Easy 3 Laces.unity
   - _sceneAsset: {fileID: 102900000, guid: 39c015f931960624fae274a5ad016945, type: 3}
-    _scenePath: Assets/2. Scenes/Level 1.unity
+    _scenePath: Assets/2. Scenes/Levels/Level Easy 4 Laces.unity
   - _sceneAsset: {fileID: 102900000, guid: 66bdf10920466cc4c817ce692f281b24, type: 3}
-    _scenePath: Assets/2. Scenes/Level 2.unity
+    _scenePath: Assets/2. Scenes/Levels/Level Medium Cross Laces.unity
+  - _sceneAsset: {fileID: 102900000, guid: cf20d8e1c8bc79244bf51a8d550556a2, type: 3}
+    _scenePath: Assets/2. Scenes/Levels/Level Medium Regular.unity
+  - _sceneAsset: {fileID: 102900000, guid: c46a0c598f0d0694aa3bf0cbdf9c3d7f, type: 3}
+    _scenePath: Assets/2. Scenes/Levels/Level Hard Twisted.unity
+  - _sceneAsset: {fileID: 102900000, guid: 87b86de6c36f1c040bd4bd5981795812, type: 3}
+    _scenePath: Assets/2. Scenes/Levels/Level Insane Tangled.unity

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace BootlacesMaster
@@ -40,6 +41,16 @@ namespace BootlacesMaster
             }
         }
 
+        public bool IsHandleOnItsPlace(IConditionLace lace, LaceHandle laceHandle)
+        {
+            var placementCondition = _winConditionPreset.Conditions
+                .PlacementConditions
+                .First(condition => condition.Color == lace.Color);
+
+            return placementCondition.FirstHole == laceHandle.AttachedHoleIndex
+                   || placementCondition.SecondHole == laceHandle.AttachedHoleIndex;
+        }
+        
         private void OnRopesLoaded()
         {
             foreach (var placementCondition in _winConditionPreset.Conditions.PlacementConditions)

@@ -12,6 +12,8 @@ public class LevelLoader : MonoBehaviour
     private const string LevelIndexPref = "level_index";
     
     [SerializeField] private LevelsContainer _levelsContainer = null;
+    [SerializeField] private bool _loadSavedLevel = true;
+    [SerializeField] private bool _useLoadingCallbacks = true;
     
     private string _levelLoaderAttachedSceneName;
     private Coroutine _asyncCoroutine;
@@ -19,7 +21,7 @@ public class LevelLoader : MonoBehaviour
     private int _currentLevelIndex;
     private List<AsyncOperation> _asyncOperations = new List<AsyncOperation>();
     
-    public event Action LevelLoading;
+    public event Action<Action> LevelLoading;
     public event Action LevelLoaded;
     public event Action<float> LoadingProgressUpdated;
 
@@ -82,20 +84,35 @@ public class LevelLoader : MonoBehaviour
         if (currentLoadedLevel != null)
         {
             _lastLoadedLevel = currentLoadedLevel;
+            _currentLevelIndex = _levelsContainer.GetLevelIndex(currentLoadedLevel);
             LevelLoaded?.Invoke();
         }
         else
         {
-            int savedLevel = 0; //PlayerPrefs.GetInt(LevelIndexPref, 0);
+            int savedLevel = 0;
             
-            Load(_levelsContainer.GetLevel(savedLevel));
+            if (_loadSavedLevel)
+                savedLevel = PlayerPrefs.GetInt(LevelIndexPref, 0);
+            
+            Load(_levelsContainer.GetLevel(savedLevel), true);
         }
     }
-    
-    private void Load(SceneReference newLevel)
+
+    private void Load(SceneReference newLevel, bool ignoreLoadingCallback = false)
     {
-        LevelLoading?.Invoke();
-        
+        if (_useLoadingCallbacks && ignoreLoadingCallback == false)
+        {
+            LevelLoading?.Invoke(() => LoadHandler(newLevel));
+        }
+        else
+        {
+            LevelLoading?.Invoke(delegate { });
+            LoadHandler(newLevel);
+        }
+    }
+
+    private void LoadHandler(SceneReference newLevel)
+    {
         if (_lastLoadedLevel != null)
             _asyncOperations.Add(SceneManager.UnloadSceneAsync(_lastLoadedLevel));
         

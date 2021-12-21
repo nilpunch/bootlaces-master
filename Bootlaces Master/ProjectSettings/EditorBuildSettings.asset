@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/2. Scenes/Boot.unity
     guid: fb32d1834edd7b44e86820df05260550
   - enabled: 1
-    path: Assets/2. Scenes/Level 1.unity
+    path: Assets/2. Scenes/Levels/Level Easy 4 Laces.unity
     guid: 39c015f931960624fae274a5ad016945
   - enabled: 0
-    path: Assets/2. Scenes/Level Maker.unity
+    path: Assets/2. Scenes/Level Maker 4 Laces.unity
     guid: 601a5877dbe755840993239d9b0a3cd2
   - enabled: 0
     path: Assets/2. Scenes/Tests.unity
@@ -21,6 +21,21 @@ EditorBuildSettings:
     path: Assets/2. Scenes/Loading Screen.unity
     guid: 927b18ba3eab637439776bf02797a6ed
   - enabled: 1
-    path: Assets/2. Scenes/Level 2.unity
+    path: Assets/2. Scenes/Levels/Level Medium Cross Laces.unity
     guid: 66bdf10920466cc4c817ce692f281b24
+  - enabled: 1
+    path: Assets/2. Scenes/Levels/Level Hard Twisted.unity
+    guid: c46a0c598f0d0694aa3bf0cbdf9c3d7f
+  - enabled: 1
+    path: Assets/2. Scenes/Levels/Level Insane Tangled.unity
+    guid: 87b86de6c36f1c040bd4bd5981795812
+  - enabled: 1
+    path: Assets/2. Scenes/Levels/Level Easy 3 Laces.unity
+    guid: 91f9342aadd5ab9448b02e27ac9e18b8
+  - enabled: 1
+    path: Assets/2. Scenes/Levels/Level Medium Regular.unity
+    guid: cf20d8e1c8bc79244bf51a8d550556a2
+  - enabled: 1
+    path: Assets/2. Scenes/Levels/Level 5 Laces.unity
+    guid: 7a5f41597487b56438e62647853976bb
   m_configObjects: {}

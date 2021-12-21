@@ -10,6 +10,7 @@ namespace BootlacesMaster.UI
         [SerializeField] private RectTransform _movingPivot = null;
         [SerializeField] private RectTransform _hidingPivot = null;
         [SerializeField] private Button _button = null;
+        [SerializeField] private Image _image = null;
         [SerializeField] private bool _hideOnAwake = true;
 
         [Space, SerializeField] private float _showTime = 0.5f;
@@ -17,7 +18,7 @@ namespace BootlacesMaster.UI
 
         private Vector2 _originalPosition;
         private Vector2 _hidingPosition;
-        private bool _hided = true;
+        private bool _hided = false;
 
         public event Action Clicked;
         
@@ -29,6 +30,8 @@ namespace BootlacesMaster.UI
             if (_hideOnAwake)
             {
                 _hided = true;
+                _button.interactable = false;
+                _image.raycastTarget = false;
                 _movingPivot.anchoredPosition = _hidingPosition;
             }
 
@@ -53,6 +56,7 @@ namespace BootlacesMaster.UI
             _hided = false;
 
             _button.interactable = true;
+            _image.raycastTarget = true;
 
             _movingPivot.DOKill();
             _movingPivot.DOAnchorPos(_originalPosition, _showTime)
@@ -67,7 +71,8 @@ namespace BootlacesMaster.UI
             _hided = true;
 
             _button.interactable = false;
-            
+            _image.raycastTarget = false;
+
             _movingPivot.DOKill();
             _movingPivot.DOAnchorPos(_hidingPosition, _hideTime)
                 .SetEase(Ease.InQuad);

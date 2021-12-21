@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3077754689127386634}
   - component: {fileID: 3539501816516666339}
+  - component: {fileID: 2715823729075385286}
   - component: {fileID: 8072999740495886119}
   m_Layer: 0
   m_Name: Start Handle
@@ -55,6 +56,23 @@ MonoBehaviour:
   _detachTime: 0.3
   _grabHeight: 1.5
   _sequenceShift: 0.6
+--- !u!114 &2715823729075385286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367636154646300478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ff84758a374cd18b3b3f79e4b32ce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ropeLace: {fileID: 1676602830305033734}
+  _laceHandle: {fileID: 3539501816516666339}
+  _meshRenderer: {fileID: 8745883382389993986}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _colorChangeTime: 0.5
 --- !u!135 &8072999740495886119
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -357,6 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200901789524256386}
   - component: {fileID: 2452447930253293953}
+  - component: {fileID: 7709462323879582732}
   - component: {fileID: 3222506044526820309}
   m_Layer: 6
   m_Name: End Handle
@@ -402,6 +421,23 @@ MonoBehaviour:
   _detachTime: 0.3
   _grabHeight: 1.5
   _sequenceShift: 0.6
+--- !u!114 &7709462323879582732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7006675449673215503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ff84758a374cd18b3b3f79e4b32ce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ropeLace: {fileID: 1676602830305033734}
+  _laceHandle: {fileID: 2452447930253293953}
+  _meshRenderer: {fileID: 8745883383217847541}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _colorChangeTime: 0.5
 --- !u!135 &3222506044526820309
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -425,6 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8745883381352788986}
   - component: {fileID: 78328874584634984}
+  - component: {fileID: 6501243090052999982}
   - component: {fileID: 1676602830305033734}
   - component: {fileID: 1736394648175933415}
   m_Layer: 6
@@ -467,6 +504,20 @@ MonoBehaviour:
   _cursor: {fileID: 2694962259095368331}
   _ropeLace: {fileID: 1676602830305033734}
   _tensionLimiter: {fileID: 1736394648175933415}
+--- !u!114 &6501243090052999982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745883381352788984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5970a9b8435148099774b82b172c07c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstHandle: {fileID: 2715823729075385286}
+  _secondHandle: {fileID: 7709462323879582732}
 --- !u!114 &1676602830305033734
 MonoBehaviour:
   m_ObjectHideFlags: 0

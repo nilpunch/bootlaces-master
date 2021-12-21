@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelsContainer: {fileID: 11400000, guid: 2aeead2b6cc05d34e8ae50b537063ccc, type: 2}
+  _loadSavedLevel: 1
+  _useLoadingCallbacks: 1

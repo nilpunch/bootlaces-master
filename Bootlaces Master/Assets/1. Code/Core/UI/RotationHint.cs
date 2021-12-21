@@ -19,8 +19,6 @@ namespace BootlacesMaster.UI
         {
             foreach (var hint in _hints)
                 hint.color = hint.color * (Color.white - Color.black);
-
-            Show();
         }
 
         public void Show()

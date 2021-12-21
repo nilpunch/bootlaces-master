@@ -8,12 +8,12 @@ namespace BootlacesMaster.UI
         
         private bool _touchesTriggered;
 
-        private PointerInputSplitter _inputSplitter;
+        private InputQuery _inputSplitter;
         
         private void Start()
         {
             _root.SetActive(false);
-            _inputSplitter = FindObjectOfType<PointerInputSplitter>();
+            _inputSplitter = FindObjectOfType<InputQuery>();
         }
 
         private void Update()

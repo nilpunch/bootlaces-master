@@ -10,6 +10,7 @@ namespace BootlacesMaster.UI
         [SerializeField] private Grabber _grabber = null;
         [SerializeField] private Holes _holes = null;
         [SerializeField] private EasingButton _easingButton = null;
+        [SerializeField] private bool _inactive = false;
         
         [Space, SerializeField] private float _inactivityDelay = 3f;
 
@@ -18,6 +19,9 @@ namespace BootlacesMaster.UI
         
         private void Awake()
         {
+            if (_inactive)
+                return;
+            
             _easingButton.Clicked += OnButtonClicked;
             _winConditionChecker.Winned += OnWinned;
             _grabber.Grabbed += OnGrabbed;
