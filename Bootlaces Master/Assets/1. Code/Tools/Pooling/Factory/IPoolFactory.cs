@@ -1,6 +1,6 @@
 ﻿namespace HighwayRage
 {
-    public interface IPoolFactory<out T> where T : IPoolable<T>
+    public interface IPoolFactory<out T>
     {
         T Create();
     }

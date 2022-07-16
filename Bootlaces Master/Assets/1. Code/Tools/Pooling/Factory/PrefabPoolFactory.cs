@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HighwayRage
 {
-    public class PrefabFactory<T> : IPoolFactory<T> where T : MonoBehaviour, IPoolable<T>
+    public class PrefabPoolFactory<T> : IPoolFactory<T> where T : Object
     {
         private readonly Transform _parent;
         private readonly T _prefab;
@@ -12,7 +12,7 @@ namespace HighwayRage
 
         private int _objectIndex = 0;
 
-        public PrefabFactory(T prefab, Transform parent, string name)
+        public PrefabPoolFactory(T prefab, Transform parent, string name)
         {
             _prefab = prefab;
             _name = name;
@@ -20,21 +20,21 @@ namespace HighwayRage
             _nameBuilder = new StringBuilder();
         }
 
-        public PrefabFactory(T prefab, Transform parent) : this(prefab, parent, prefab.name)
+        public PrefabPoolFactory(T prefab, Transform parent) : this(prefab, parent, prefab.name)
         {
         }
 
-        public PrefabFactory(T prefab) : this(prefab, null, prefab.name)
+        public PrefabPoolFactory(T prefab) : this(prefab, null, prefab.name)
         {
         }
 
         T IPoolFactory<T>.Create()
         {
-            T newGameObject = _parent ? Object.Instantiate(_prefab, _parent) : Object.Instantiate(_prefab);
-            newGameObject.name = _nameBuilder.Append(_name).Append(' ').Append(_objectIndex).ToString();
+            T instance = _parent ? Object.Instantiate(_prefab, _parent) : Object.Instantiate(_prefab);
+            instance.name = _nameBuilder.Append(_name).Append(' ').Append(_objectIndex).ToString();
             _nameBuilder.Clear();
             _objectIndex++;
-            return newGameObject;
+            return instance;
         }
     }
 }
