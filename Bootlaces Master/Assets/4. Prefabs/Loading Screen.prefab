@@ -269,6 +269,7 @@ MonoBehaviour:
   _rightShade: {fileID: 6847758710572425074}
   _logo: {fileID: 5567502586857215117}
   _animationTime: 1
+  _delay: 0.2
 --- !u!223 &5567502586944489769
 Canvas:
   m_ObjectHideFlags: 0

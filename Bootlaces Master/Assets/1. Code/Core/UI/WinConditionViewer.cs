@@ -48,8 +48,10 @@ namespace BootlacesMaster.UI
 
         private void OnDestroy()
         {
-            _interactionsSetup.LevelStarted -= OnLevelStarted;
-            _winConditionChecker.Winned -= OnWinned;
+            if (_interactionsSetup != null)
+                _interactionsSetup.LevelStarted -= OnLevelStarted;
+            if (_winConditionChecker != null)
+                _winConditionChecker.Winned -= OnWinned;
         }
 
         private void OnLevelStarted()

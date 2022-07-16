@@ -11,9 +11,11 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _logo = null;
     [SerializeField] private float _animationTime = 1f;
     [SerializeField] private float _delay = 1f;
+    [SerializeField] private float _firstLoadDelay = 1f;
     
     private Rect _originalLeftRect;
     private Rect _originalRightRect;
+    private bool _firstLoad = true;
     
     private void Awake()
     {
@@ -55,8 +57,15 @@ public class LoadingScreen : MonoBehaviour
         _rightShade.DOKill();
         _logo.DOKill();
 
+        float delay = _delay;
+
+        if (_firstLoad)
+            delay = _firstLoadDelay;
+
+        _firstLoad = false;
+        
         DOTween.Sequence()
-            .AppendInterval(_delay)
+            .AppendInterval(delay)
             .Append(_leftShade
                 .DOAnchorPos(_originalLeftRect.center + Vector2.left * _originalLeftRect.width, _animationTime)
                 .SetEase(Ease.InOutCubic))

@@ -19,6 +19,8 @@ namespace BootlacesMaster
         public event Action StartRotating;
         public event Action StopRotating;
 
+        public Transform Pivot => _rotationPivot;
+
         private void Update()
         {
             float rotation = _speed.x * Time.deltaTime;

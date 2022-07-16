@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -65,6 +66,13 @@ public class LevelLoader : MonoBehaviour
         int nextLevelIndex = (currentLevelIndex + 1) % _levelsContainer.Levels.Count;
         Load(_levelsContainer.GetLevel(nextLevelIndex));
     }
+    
+    public void StartPrevLevel()
+    {
+        int currentLevelIndex = CurrentLevelIndex;
+        int nextLevelIndex = (_levelsContainer.Levels.Count + currentLevelIndex - 1) % _levelsContainer.Levels.Count;
+        Load(_levelsContainer.GetLevel(nextLevelIndex));
+    }
 
     public void StartLevel(int index)
     {
@@ -124,6 +132,8 @@ public class LevelLoader : MonoBehaviour
         if (_levelsContainer.Storing(newLevel))
             _currentLevelIndex = _levelsContainer.GetLevelIndex(newLevel);
 
+        DOTween.KillAll();
+        
         _asyncCoroutine = StartCoroutine(ProcessAsyncOperations(() =>
         {
             _asyncOperations.Clear();
